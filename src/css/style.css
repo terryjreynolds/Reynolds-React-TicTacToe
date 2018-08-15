@@ -1,7 +1,7 @@
 body {
   color: white;
-  margin: 20px;
   background: rgb(40, 44, 52);
+  text-align: center;
 }
 * {
   box-sizing: border-box;
@@ -13,8 +13,6 @@ body {
 .game-title {
   text-align: center;
   grid-area: 1/1 / span 1 / span 1;
-  margin-top: 20vh;
-  margin-bottom: 20vh;
   font-size: 5vw;
   font-family: "Noto Sans", sans-serif;
   color: rgb(97, 218, 251);
@@ -43,53 +41,50 @@ body {
 .app {
   display: grid;
   grid-template-rows: auto, auto, auto, auto, auto;
-  grid-template-columns: auto;
+  align-items: center;
+  margin-top: 10vh;
 }
 .app-game-title {
-  text-align: center;
-  grid-area: 1/1 / span 1 / span 1;
-  margin-top: 5vh;
-  margin-bottom: 0.2vh;
-  font-size: 5vw;
+  grid-row-start: 1;
+  grid-row-end: 2;
+  font-size: 10vh;
   font-family: "Noto Sans", sans-serif;
   color: rgb(97, 218, 251);
 }
 .scoreboard {
-  text-align: center;
-  font-size: 1.5vw;
+  font-size: 3vh;
   font-family: "Noto Sans", sans-serif;
-  grid-area: 2/1 / span 1 / span 1;
-  margin: 0.2vw;
+  grid-row-start: 2;
+  grid-row-end: 3;
 }
 .player-integer {
-  margin: 0.5vw;
+  margin: 1vh;
 }
 .computer-integer {
-  margin: 0.5vw;
+  margin: 1vh;
 }
 .reset {
-  grid-area: 3/1 / span 1 / span 1;
-  margin: 0.2vw;
+  grid-row-start: 3;
+  grid-row-end: 4;
+  margin-bottom: 3vh;
 }
 .reset-button {
-  font-size: 1vw;
-  text-align: center;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin: auto;
-  margin-bottom: 0.2vw;
+  font-size: 2vh;
   font-family: "Noto Sans", sans-serif;
   cursor: pointer;
 }
+.board-wrapper {
+  grid-row-start: 4;
+  grid-row-end: 5;
+  margin: auto;
+  width: calc(50vh - 40px);
+  height: calc(50vh - 40px);
+}
 .game-board {
-  grid-area: 4/1 / span 1 / span 1;
   display: grid;
   grid-template-rows: auto, auto, auto;
   grid-template-columns: auto, auto, auto;
-  margin: auto;
-  width: 30vw;
-  height: 30vw;
+  height: 100%;
 }
 .square0 {
   grid-area: 1/1 / span 1 / span 1;
@@ -165,11 +160,11 @@ body {
 }
 
 .footer {
-  text-align: center;
-  margin-top: 0.2vw;
-  font-size: calc(8px + 0.2vw);
+  grid-row-start: 5;
+  grid-row-end: 6;
+  margin-top: 2vh;
+  font-size: 0.8vw;
   font-family: "Noto Sans", sans-serif;
   color: white;
   cursor: pointer;
-  grid-area: 5/1 / span 1 / span 1;
 }
