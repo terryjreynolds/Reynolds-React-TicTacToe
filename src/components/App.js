@@ -6,7 +6,7 @@ import GameBoard from "./GameBoard";
 
 class App extends React.Component {
   state = {
-    level: 1,
+    level: 0,
     player_token: "",
     computer_token: "",
     board: ["", "", "", "", "", "", "", "", ""],
@@ -14,6 +14,25 @@ class App extends React.Component {
     player_score: 0,
     computer_score: 0
   };
+  componentDidMount() {
+    console.log("level", this.props.level);
+    console.log("player_token", this.props.player_token);
+    const level = this.props.level;
+    const player_token = this.props.player_token;
+    let computer_token = "";
+    player_token === "X" ? (computer_token = "O") : (computer_token = "X");
+    this.setState(
+      {
+        level,
+        player_token,
+        computer_token
+      },
+      () => {
+        console.log("currentstate", this.state);
+      }
+    );
+  }
+
   render() {
     return (
       <div className="app">
