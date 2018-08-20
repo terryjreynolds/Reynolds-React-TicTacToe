@@ -88,6 +88,14 @@ body {
   grid-template-columns: auto, auto, auto;
   height: 100%;
 }
+.square0.lighted {
+  text-align: center;
+  padding: 1vw;
+  font-size: 4vw;
+  border-color: rgb(97, 218, 251);
+  font-family: "Noto Sans", sans-serif;
+  background-color: rgb(97, 218, 251);
+}
 .square0 {
   grid-area: 1/1 / span 1 / span 1;
   text-align: center;

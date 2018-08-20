@@ -19,19 +19,27 @@ const Router = props => (
       />
       <Route
         path="/game/X1"
-        render={props => <App {...props} player_token="X" level="1" />}
+        render={props => (
+          <App {...props} player_token="X" level="1" whosTurn="player" />
+        )}
       />
       <Route
         path="/game/X2"
-        render={props => <App {...props} player_token="X" level="2" />}
+        render={props => (
+          <App {...props} player_token="X" level="2" whosTurn="player" />
+        )}
       />
       <Route
         path="/game/O1/"
-        render={props => <App {...props} player_token="O" level="1" />}
+        render={props => (
+          <App {...props} player_token="O" level="1" whosTurn="computer" />
+        )}
       />
       <Route
         path="/game/O2/"
-        render={props => <App {...props} player_token="O" level="2" />}
+        render={props => (
+          <App {...props} player_token="O" level="2" whosTurn="computer" />
+        )}
       />
       <Route component={NotFound} />
     </Switch>
