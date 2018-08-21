@@ -6,25 +6,29 @@ import GameBoard from "./GameBoard";
 import PlayButtons from "./PlayButtons";
 
 class App extends React.Component {
-  state = {
-    level: 0,
-    player_token: "",
-    computer_token: "",
-    board: ["", "", "", "", "", "", "", "", ""],
-    whosTurn: true,
-    player_score: 0,
-    computer_score: 0,
-    gameOver: false,
-    square0: false,
-    square1: false,
-    square2: false,
-    square3: false,
-    square4: false,
-    square5: false,
-    square6: false,
-    square7: false,
-    square8: false
-  };
+  constructor(props) {
+    super(props);
+    this.initialState = {
+      level: 0,
+      player_token: "",
+      computer_token: "",
+      board: ["", "", "", "", "", "", "", "", ""],
+      whosTurn: true,
+      player_score: 0,
+      computer_score: 0,
+      gameOver: false,
+      square0: false,
+      square1: false,
+      square2: false,
+      square3: false,
+      square4: false,
+      square5: false,
+      square6: false,
+      square7: false,
+      square8: false
+    };
+    this.state = this.initialState;
+  }
   componentDidMount() {
     console.log("level", this.props.level);
     console.log("player_token", this.props.player_token);
@@ -61,7 +65,25 @@ class App extends React.Component {
       }
     );
   };
+  playAgain = () => {
+    this.setState({
+      board: ["", "", "", "", "", "", "", "", ""],
+      gameOver: false,
+      square0: false,
+      square1: false,
+      square2: false,
+      square3: false,
+      square4: false,
+      square5: false,
+      square6: false,
+      square7: false,
+      square8: false
+    });
+  };
 
+  reset = () => {
+    this.setState(this.initialState);
+  };
   checkForAIWinningMove = (arr, state) => {
     const array = [
       [arr[0], arr[1], arr[2]],
@@ -424,8 +446,11 @@ class App extends React.Component {
           player_score={this.state.player_score}
           computer_score={this.state.computer_score}
         />
-        <PlayButtons />
-
+        <PlayButtons
+          initialState={this.initialState}
+          reset={this.reset}
+          playAgain={this.playAgain}
+        />
         <GameBoard
           board={this.state.board}
           player_token={this.state.player_token}

@@ -41,6 +41,21 @@ class GameBoard extends React.Component {
     };
     //use helper function to isolate 3 winning squares
     const refined = findSquaresToLight(squares);
+    console.log("refined", refined, refined.length);
+    if (refined.length === 0) {
+      this.setState({
+        square0: false,
+        square1: false,
+        square2: false,
+        square3: false,
+        square4: false,
+        square5: false,
+        square6: false,
+        square7: false,
+        square8: false
+      });
+      //probably need render props func. here to use the new state
+    }
 
     //construct an object to pass to setState
     let stateObject = objectMaker(refined[0], refined[1], refined[2]);
