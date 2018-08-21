@@ -5,8 +5,9 @@ class Scoreboard extends React.Component {
     return (
       <h2 className="scoreboard">
         Player:
-        <span className="player-integer"> 0</span> Computer:{" "}
-        <span className="computer-integer"> 0</span>
+        <span className="player-integer"> {this.props.player_score}</span>{" "}
+        Computer:{" "}
+        <span className="computer-integer"> {this.props.computer_score}</span>
       </h2>
     );
   }

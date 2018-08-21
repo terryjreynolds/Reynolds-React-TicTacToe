@@ -1,8 +1,9 @@
 import React from "react";
 import Footer from "./Footer";
 import Scoreboard from "./Scoreboard";
-import ResetButton from "./ResetButton";
+
 import GameBoard from "./GameBoard";
+import PlayButtons from "./PlayButtons";
 
 class App extends React.Component {
   state = {
@@ -13,6 +14,7 @@ class App extends React.Component {
     whosTurn: true,
     player_score: 0,
     computer_score: 0,
+    gameOver: false,
     square0: false,
     square1: false,
     square2: false,
@@ -293,70 +295,93 @@ class App extends React.Component {
     //check to see what player matches the letter in the winningRow and call and post to the screen
     if (winningRow[0] === this.state.player_token) {
       console.log("player wins");
+      this.setState(prevState => {
+        return { player_score: prevState.player_score + 1 };
+      });
     } else {
       console.log("Computer Wins");
+      this.setState(prevState => {
+        return { computer_score: prevState.computer_score + 1 };
+      });
     }
     //light up the winning squares
     this.lightUpSquares(rowIndex);
   };
   lightUpSquares = rowIndex => {
+    this.setState({
+      gameOver: true
+    });
     console.log("im in lightUpSquares");
-    let a;
-    let b;
-    let c;
     console.log("rowIndex", rowIndex);
     switch (rowIndex) {
       case 0:
-        a = 0;
-        b = 1;
-        c = 2;
+        this.setState({
+          square0: true,
+          square1: true,
+          square2: true
+        });
         break;
       case 1:
-        a = 3;
-        b = 4;
-        c = 5;
+        this.setState({
+          square3: true,
+          square4: true,
+          square5: true
+        });
         break;
       case 2:
-        a = 6;
-        b = 7;
-        c = 8;
+        this.setState({
+          square6: true,
+          square7: true,
+          square8: true
+        });
         break;
       case 3:
-        a = 0;
-        b = 3;
-        c = 6;
+        this.setState({
+          square0: true,
+          square3: true,
+          square6: true
+        });
         break;
       case 4:
-        a = 1;
-        b = 4;
-        c = 7;
+        this.setState({
+          square1: true,
+          square4: true,
+          square7: true
+        });
         break;
       case 5:
-        a = 2;
-        b = 5;
-        c = 8;
+        this.setState({
+          square2: true,
+          square5: true,
+          square8: true
+        });
         break;
       case 6:
-        a = 0;
-        b = 4;
-        c = 8;
+        this.setState({
+          square0: true,
+          square4: true,
+          square8: true
+        });
         break;
       case 7:
-        this.setState(
-          {
-            square2: true,
-            square4: true,
-            square6: true
-          },
-          () => {
-            console.log(this.state.square2);
-          }
-        );
+        this.setState({
+          square2: true,
+          square4: true,
+          square6: true
+        });
         break;
       default:
-        a = 0;
-        b = 1;
-        c = 2;
+        this.setState({
+          square0: true,
+          square1: true,
+          square2: true,
+          square3: true,
+          square4: true,
+          square5: true,
+          square6: true,
+          square7: true,
+          square8: true
+        });
     }
     //this.timingSquareLighting(a, b, c);
     console.log(this.state.square2);
@@ -395,13 +420,18 @@ class App extends React.Component {
     return (
       <div className="app">
         <header className="app-game-title">Tic Tac Toe</header>
-        <Scoreboard />
-        <ResetButton />
+        <Scoreboard
+          player_score={this.state.player_score}
+          computer_score={this.state.computer_score}
+        />
+        <PlayButtons />
+
         <GameBoard
           board={this.state.board}
           player_token={this.state.player_token}
           setSquareState={this.setSquareState}
           whosTurn={this.state.whosTurn}
+          gameOver={this.state.gameOver}
           square0={this.state.square0}
           square1={this.state.square1}
           square2={this.state.square2}
