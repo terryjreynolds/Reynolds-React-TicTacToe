@@ -13,7 +13,15 @@ class App extends React.Component {
     whosTurn: true,
     player_score: 0,
     computer_score: 0,
-    square0: false
+    square0: false,
+    square1: false,
+    square2: false,
+    square3: false,
+    square4: false,
+    square5: false,
+    square6: false,
+    square7: false,
+    square8: false
   };
   componentDidMount() {
     console.log("level", this.props.level);
@@ -45,19 +53,14 @@ class App extends React.Component {
         board,
         whosTurn
       },
+
       () => {
-        if (!whosTurn) {
-          const didAIWin = this.checkForAIWinningMove(this.state.board);
-          console.log("didAIWin", didAIWin);
-          didAIWin
-            ? this.ai_MoveUpdate(this.state.computer_token)
-            : this.shouldAIBlock(this.state.board);
-        }
+        this.checkForWinOrDraw(this.state.board, this.state);
       }
     );
   };
 
-  checkForAIWinningMove = arr => {
+  checkForAIWinningMove = (arr, state) => {
     const array = [
       [arr[0], arr[1], arr[2]],
       [arr[3], arr[4], arr[5]],
@@ -69,11 +72,11 @@ class App extends React.Component {
       [arr[2], arr[4], arr[6]]
     ];
     console.log("array", array);
-    console.log("playertoken", this.state.player_token);
+    console.log("playertoken", state.player_token);
     //find an array among arrays that has two AI tokens and one empty string
     const filtered = array
-      .map((c, i) => c.filter(d => d === this.state.player_token || d === ""))
-      .map(f => f.length === 1 && f.includes(this.state.player_token) === false)
+      .map((c, i) => c.filter(d => d === state.player_token || d === ""))
+      .map(f => f.length === 1 && f.includes(state.player_token) === false)
       .indexOf(true);
     console.log("filtered", filtered);
 
@@ -86,11 +89,11 @@ class App extends React.Component {
       const element = this.stateReferenceConverter(filtered, targetIndex);
       console.log("element", element);
 
-      let ai_token = this.state.computer_token;
+      let ai_token = state.computer_token;
 
       this.ai_MoveUpdate(element, ai_token);
     } else {
-      return false;
+      this.shouldAIBlock(arr, state);
     }
   };
   stateReferenceConverter(a, b) {
@@ -157,7 +160,6 @@ class App extends React.Component {
       [arr[0], arr[4], arr[8]],
       [arr[2], arr[4], arr[6]]
     ];
-    const player_token = this.state.player_token;
     const computer_token = this.state.computer_token;
     const filtered = array
       .map((c, i) => c.filter(d => d === computer_token || d === ""))
@@ -234,13 +236,12 @@ class App extends React.Component {
         board,
         whosTurn
       },
-      //() => {this.checkForWinOrDraw(this.state.board, this.state)}
       () => {
-        console.log("checkForWinOrDraw", this.state.board, this.state.whosTurn);
+        this.checkForWinOrDraw(this.state.board, this.state);
       }
     );
   };
-  checkForWinOrDraw = arr => {
+  checkForWinOrDraw = (arr, state) => {
     console.log("im in checkForWinOrDraw");
     //an array of all the possible winning rows
     const array = [
@@ -268,19 +269,19 @@ class App extends React.Component {
       ? this.declareWinner(array[trueIndexX], trueIndexX)
       : trueIndexO !== -1
         ? this.declareWinner(array[trueIndexO], trueIndexO)
-        : this.checkForDraw(this.state.board);
+        : this.checkForDraw(arr, state);
   };
-  checkForDraw = arr => {
+  checkForDraw = (arr, state) => {
     console.log("im in checkForDraw");
     //check for draw after checking for win
     if (arr.every(c => c !== "")) {
       //logic needed here
       alert("its a draw");
     } else {
-      const turn = this.state.whosTurn;
+      const turn = state.whosTurn;
       console.log("turn", turn);
       if (!turn) {
-        this.checkForClearBoard(arr);
+        this.checkForClearBoard(arr, state);
         //this is where the AI move will end if whosTurn is not AI, and the AI move starts with //checkForClearBoard
       }
     }
@@ -341,31 +342,49 @@ class App extends React.Component {
         c = 8;
         break;
       case 7:
-        a = 2;
-        b = 4;
-        c = 6;
+        this.setState(
+          {
+            square2: true,
+            square4: true,
+            square6: true
+          },
+          () => {
+            console.log(this.state.square2);
+          }
+        );
         break;
       default:
         a = 0;
         b = 1;
         c = 2;
     }
-    this.timingSquareLighting(`square${a}`, `square${b}`, `square${c}`);
+    //this.timingSquareLighting(a, b, c);
+    console.log(this.state.square2);
   };
-  timingSquareLighting = (A, B, C) => {
+  /*  timingSquareLighting = (a, b, c) => {
     console.log("im in timingSquareLighting");
-    console.log(A, B, C);
-  };
-  checkForClearBoard = arr => {
+    this.setState(
+      {
+        square2: true,
+        square4: true,
+        square6: true
+      },
+      () => {
+        console.log(this.state.square2, this.state.square4, this.state.square6);
+      }
+    );
+  }; */
+
+  checkForClearBoard = (arr, state) => {
     console.log("im in checkForClearBoard");
 
     //if the board is clear, call a function to choose a best first move; if not, call
     //checkforaWinningMove
-    const boardIsEmpty = this.boardPopulation(this.state);
+    const boardIsEmpty = this.boardPopulation(state);
     console.log("boardIsEmpty", boardIsEmpty);
     boardIsEmpty === 9
       ? this.pickAGoodFirstAIMove()
-      : this.checkForAIWinningMove(arr, this.state);
+      : this.checkForAIWinningMove(arr, state);
   };
   boardPopulation = state => {
     console.log("im in boardPopulation", state.board);
@@ -384,7 +403,14 @@ class App extends React.Component {
           setSquareState={this.setSquareState}
           whosTurn={this.state.whosTurn}
           square0={this.state.square0}
-          toggle={this.toggle}
+          square1={this.state.square1}
+          square2={this.state.square2}
+          square3={this.state.square3}
+          square4={this.state.square4}
+          square5={this.state.square5}
+          square6={this.state.square6}
+          square7={this.state.square7}
+          square8={this.state.square8}
         />
         <Footer />
       </div>
