@@ -5,7 +5,7 @@ import GameBoard from "./GameBoard";
 import PlayButtons from "./PlayButtons";
 import { emptyIndexies } from "../helpers";
 import { winning } from "../helpers";
-
+import { numerizeBoard } from "../helpers";
 class App extends React.Component {
   state = {
     level: 0,
@@ -45,10 +45,22 @@ class App extends React.Component {
       },
       () => {
         console.log("currentstate", this.state);
-        if(this.state.level === 2){
-        this.state.whosTurn ? alert("player goes first") : this.ai_MoveUpdate(this.minimax(this.state.board, this.state.computer_token, this.state.computer_token))
-        }else {
-          this.state.whosTurn ? alert("player goes first") : this.checkForAIWinningMove(this.state.board, this.state)
+        if (this.state.level === 2) {
+          if (this.state.whosTurn) {
+            console.log("player goes first");
+          } else {
+            //call minimax for computer move because we are in level two
+            const perfectMove = this.minimax(
+              numerizeBoard(this.state.board),
+              this.setState.computer_token
+            );
+            const perfectMoveIndex = perfectMove.index;
+            this.ai_MoveUpdate(perfectMoveIndex, this.state.computer_token);
+          }
+        } else {
+          this.state.whosTurn
+            ? console.log("player goes first")
+            : this.checkForAIWinningMove(this.state.board, this.state)
         }
       }
     );

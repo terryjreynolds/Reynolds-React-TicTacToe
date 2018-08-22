@@ -52,3 +52,11 @@ export function winning(board, contestant) {
     return false;
   }
 }
+export function numerizeBoard(arr) {
+  let numerizedBoard = [];
+  arr.map(
+    (c, i) => (c === "" ? numerizedBoard.push(i) : numerizedBoard.push(c))
+  );
+  console.log("numerizedBoard", numerizedBoard);
+  return numerizedBoard;
+}
