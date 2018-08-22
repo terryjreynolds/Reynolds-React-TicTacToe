@@ -6,29 +6,27 @@ import GameBoard from "./GameBoard";
 import PlayButtons from "./PlayButtons";
 
 class App extends React.Component {
-  constructor(props) {
-    super(props);
-    this.initialState = {
-      level: 0,
-      player_token: "",
-      computer_token: "",
-      board: ["", "", "", "", "", "", "", "", ""],
-      whosTurn: true,
-      player_score: 0,
-      computer_score: 0,
-      gameOver: false,
-      square0: false,
-      square1: false,
-      square2: false,
-      square3: false,
-      square4: false,
-      square5: false,
-      square6: false,
-      square7: false,
-      square8: false
-    };
-    this.state = this.initialState;
-  }
+  state = {
+    level: 0,
+    player_token: "",
+    computer_token: "",
+    board: ["", "", "", "", "", "", "", "", ""],
+    whosTurn: true,
+    player_score: 0,
+    computer_score: 0,
+    gameOver: false,
+    square0: false,
+    square1: false,
+    square2: false,
+    square3: false,
+    square4: false,
+    square5: false,
+    square6: false,
+    square7: false,
+    square8: false,
+    winner: ""
+  };
+
   componentDidMount() {
     console.log("level", this.props.level);
     console.log("player_token", this.props.player_token);
@@ -66,8 +64,48 @@ class App extends React.Component {
     );
   };
   playAgain = () => {
+    if (this.state.winner === "computer") {
+      this.setState({
+        board: ["", "", "", "", "", "", "", "", ""],
+        gameOver: false,
+        square0: false,
+        square1: false,
+        square2: false,
+        square3: false,
+        square4: false,
+        square5: false,
+        square6: false,
+        square7: false,
+        square8: false
+      });
+    } else {
+      const whosTurn = !this.state.whosTurn;
+      this.setState({
+        board: ["", "", "", "", "", "", "", "", ""],
+        gameOver: false,
+        square0: false,
+        square1: false,
+        square2: false,
+        square3: false,
+        square4: false,
+        square5: false,
+        square6: false,
+        square7: false,
+        square8: false,
+        whosTurn
+      });
+    }
+  };
+
+  reset = () => {
     this.setState({
+      level: 0,
+      player_token: "",
+      computer_token: "",
       board: ["", "", "", "", "", "", "", "", ""],
+      whosTurn: true,
+      player_score: 0,
+      computer_score: 0,
       gameOver: false,
       square0: false,
       square1: false,
@@ -77,12 +115,10 @@ class App extends React.Component {
       square5: false,
       square6: false,
       square7: false,
-      square8: false
+      square8: false,
+      winner: ""
     });
-  };
-
-  reset = () => {
-    this.setState(this.initialState);
+    this.props.history.push(`/`);
   };
   checkForAIWinningMove = (arr, state) => {
     const array = [
@@ -229,7 +265,7 @@ class App extends React.Component {
     console.log("arrayOfCorners", arrayOfCorners);
 
     if (arrayOfCorners.length === 0) {
-      this.chooseFromRemainingCells();
+      this.chooseFromRemainingCells(arr);
     } else {
       console.log("length", arrayOfCorners.length);
       let num = Math.floor(Math.random() * arrayOfCorners.length + 0);
@@ -300,7 +336,25 @@ class App extends React.Component {
     //check for draw after checking for win
     if (arr.every(c => c !== "")) {
       //logic needed here
-      alert("its a draw");
+      console.log("its a draw");
+      const whosTurn = !this.state.whosTurn;
+      setTimeout(() => {
+        this.setState({
+          board: ["", "", "", "", "", "", "", "", ""],
+          gameOver: false,
+          whosTurn,
+          square0: false,
+          square1: false,
+          square2: false,
+          square3: false,
+          square4: false,
+          square5: false,
+          square6: false,
+          square7: false,
+          square8: false
+        });
+      }, 2000);
+      console.log("drawturn", state.whosTurn);
     } else {
       const turn = state.whosTurn;
       console.log("turn", turn);
@@ -318,21 +372,26 @@ class App extends React.Component {
     if (winningRow[0] === this.state.player_token) {
       console.log("player wins");
       this.setState(prevState => {
-        return { player_score: prevState.player_score + 1 };
+        return {
+          player_score: prevState.player_score + 1,
+          winner: "player",
+          gameOver: true
+        };
       });
     } else {
       console.log("Computer Wins");
       this.setState(prevState => {
-        return { computer_score: prevState.computer_score + 1 };
+        return {
+          computer_score: prevState.computer_score + 1,
+          winner: "computer",
+          gameOver: true
+        };
       });
     }
     //light up the winning squares
     this.lightUpSquares(rowIndex);
   };
   lightUpSquares = rowIndex => {
-    this.setState({
-      gameOver: true
-    });
     console.log("im in lightUpSquares");
     console.log("rowIndex", rowIndex);
     switch (rowIndex) {
@@ -394,34 +453,18 @@ class App extends React.Component {
         break;
       default:
         this.setState({
-          square0: true,
-          square1: true,
-          square2: true,
-          square3: true,
-          square4: true,
-          square5: true,
-          square6: true,
-          square7: true,
-          square8: true
+          square0: false,
+          square1: false,
+          square2: false,
+          square3: false,
+          square4: false,
+          square5: false,
+          square6: false,
+          square7: false,
+          square8: false
         });
     }
-    //this.timingSquareLighting(a, b, c);
-    console.log(this.state.square2);
   };
-  /*  timingSquareLighting = (a, b, c) => {
-    console.log("im in timingSquareLighting");
-    this.setState(
-      {
-        square2: true,
-        square4: true,
-        square6: true
-      },
-      () => {
-        console.log(this.state.square2, this.state.square4, this.state.square6);
-      }
-    );
-  }; */
-
   checkForClearBoard = (arr, state) => {
     console.log("im in checkForClearBoard");
 

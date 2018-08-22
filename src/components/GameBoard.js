@@ -80,7 +80,7 @@ class GameBoard extends React.Component {
                 ? true
                 : false
             }
-            className={this.state.square0 ? "square-lit" : "square0"}
+            className={this.state.square0 ? "square0-lit" : "square0"}
             onClick={() => this.handleClick(0)}
           >
             {this.props.board[0]}
@@ -91,7 +91,7 @@ class GameBoard extends React.Component {
                 ? true
                 : false
             }
-            className={this.state.square1 ? "square-lit" : "square1"}
+            className={this.state.square1 ? "square1-lit" : "square1"}
             onClick={() => this.handleClick(1)}
           >
             {this.props.board[1]}
@@ -102,7 +102,7 @@ class GameBoard extends React.Component {
                 ? true
                 : false
             }
-            className={this.state.square2 ? "square-lit" : "square2"}
+            className={this.state.square2 ? "square2-lit" : "square2"}
             onClick={() => this.handleClick(2)}
           >
             {this.props.board[2]}
@@ -113,7 +113,7 @@ class GameBoard extends React.Component {
                 ? true
                 : false
             }
-            className={this.state.square3 ? "square-lit" : "square3"}
+            className={this.state.square3 ? "square3-lit" : "square3"}
             onClick={() => this.handleClick(3)}
           >
             {this.props.board[3]}
@@ -124,7 +124,7 @@ class GameBoard extends React.Component {
                 ? true
                 : false
             }
-            className={this.state.square4 ? "square-lit" : "square4"}
+            className={this.state.square4 ? "square4-lit" : "square4"}
             onClick={() => this.handleClick(4)}
           >
             {this.props.board[4]}
@@ -135,7 +135,7 @@ class GameBoard extends React.Component {
                 ? true
                 : false
             }
-            className={this.state.square5 ? "square-lit" : "square5"}
+            className={this.state.square5 ? "square5-lit" : "square5"}
             onClick={() => this.handleClick(5)}
           >
             {this.props.board[5]}
@@ -146,7 +146,7 @@ class GameBoard extends React.Component {
                 ? true
                 : false
             }
-            className={this.state.square6 ? "square-lit" : "square6"}
+            className={this.state.square6 ? "square6-lit" : "square6"}
             onClick={() => this.handleClick(6)}
           >
             {this.props.board[6]}
@@ -157,7 +157,7 @@ class GameBoard extends React.Component {
                 ? true
                 : false
             }
-            className={this.state.square7 ? "square-lit" : "square7"}
+            className={this.state.square7 ? "square7-lit" : "square7"}
             onClick={() => this.handleClick(7)}
           >
             {this.props.board[7]}
@@ -168,7 +168,7 @@ class GameBoard extends React.Component {
                 ? true
                 : false
             }
-            className={this.state.square8 ? "square-lit" : "square8"}
+            className={this.state.square8 ? "square8-lit" : "square8"}
             onClick={() => this.handleClick(8)}
           >
             {this.props.board[8]}

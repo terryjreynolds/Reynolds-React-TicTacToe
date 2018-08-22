@@ -1,7 +1,7 @@
 import React from "react";
 
 class PlayButtons extends React.Component {
-  handleClick = () => {
+  handleClickPlayAgain = () => {
     this.props.playAgain();
   };
   handleClickReset = () => {
