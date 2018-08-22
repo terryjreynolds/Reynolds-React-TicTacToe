@@ -1,7 +1,7 @@
 import React from "react";
 import Footer from "./Footer";
 import Scoreboard from "./Scoreboard";
-
+import { emptyIndexies } from "../helpers";
 import GameBoard from "./GameBoard";
 import PlayButtons from "./PlayButtons";
 
