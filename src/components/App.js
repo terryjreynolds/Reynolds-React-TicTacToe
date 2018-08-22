@@ -46,21 +46,23 @@ class App extends React.Component {
       () => {
         console.log("currentstate", this.state);
         if (this.state.level === 2) {
-          if (this.state.whosTurn) {
+          if (this.state.whosTurn === true) {
             console.log("player goes first");
           } else {
             //call minimax for computer move because we are in level two
             const perfectMove = this.minimax(
               numerizeBoard(this.state.board),
-              this.setState.computer_token
+              this.state.computer_token
             );
             const perfectMoveIndex = perfectMove.index;
             this.ai_MoveUpdate(perfectMoveIndex, this.state.computer_token);
           }
         } else {
-          this.state.whosTurn
-            ? console.log("player goes first")
-            : this.checkForAIWinningMove(this.state.board, this.state)
+          if (this.state.whosTurn === true) {
+            console.log("player goes first");
+          } else {
+            this.checkForAIWinningMove(this.state.board, this.state);
+          }
         }
       }
     );
@@ -94,9 +96,10 @@ class App extends React.Component {
         square5: false,
         square6: false,
         square7: false,
-        square8: false
+        square8: false,
+        winner: ""
       });
-    } else {
+    } else if (this.state.winner === "player") {
       const whosTurn = !this.state.whosTurn;
       this.setState({
         board: ["", "", "", "", "", "", "", "", ""],
@@ -110,8 +113,42 @@ class App extends React.Component {
         square6: false,
         square7: false,
         square8: false,
+        winner: "",
         whosTurn
       });
+    } else if(this.state.winner === "") {
+      if (this.state.player_token === "X") {
+        this.setState({
+          board: ["", "", "", "", "", "", "", "", ""],
+          gameOver: false,
+          square0: false,
+          square1: false,
+          square2: false,
+          square3: false,
+          square4: false,
+          square5: false,
+          square6: false,
+          square7: false,
+          square8: false,
+          whosTurn: true,
+          winner: ""
+        });
+      } else {
+        this.setState({
+          board: ["", "", "", "", "", "", "", "", ""],
+          gameOver: false,
+          square0: false,
+          square1: false,
+          square2: false,
+          square3: false,
+          square4: false,
+          square5: false,
+          square6: false,
+          square7: false,
+          square8: false,
+          whosTurn: false
+        });
+      }
     }
   };
 
@@ -355,7 +392,7 @@ class App extends React.Component {
     if (arr.every(c => c !== "")) {
       //logic needed here
       console.log("its a draw");
-      const whosTurn = !this.state.whosTurn;
+      /*  const whosTurn = !this.state.whosTurn;
       setTimeout(() => {
         this.setState({
           board: ["", "", "", "", "", "", "", "", ""],
@@ -371,13 +408,23 @@ class App extends React.Component {
           square7: false,
           square8: false
         });
-      }, 2000);
+      }, 2000); */
       console.log("drawturn", state.whosTurn);
     } else {
       const turn = state.whosTurn;
       console.log("turn", turn);
-      if (!turn) {
-        this.checkForClearBoard(arr, state);
+      console.log("level", state.level, "computertoken", state.computer_token);
+      if (turn === false) {
+        if (state.level === 1) {
+          this.checkForClearBoard(arr, state);
+        } else {
+          const perfectMove = this.minimax(
+            numerizeBoard(state.board),
+            state.computer_token
+          );
+          const perfectMoveIndex = perfectMove.index;
+          this.ai_MoveUpdate(perfectMoveIndex, state.computer_token);
+        }
         //this is where the AI move will end if whosTurn is not AI, and the AI move starts with //checkForClearBoard
       }
     }
