@@ -1,9 +1,10 @@
 import React from "react";
 import Footer from "./Footer";
 import Scoreboard from "./Scoreboard";
-import { emptyIndexies } from "../helpers";
 import GameBoard from "./GameBoard";
 import PlayButtons from "./PlayButtons";
+import { emptyIndexies } from "../helpers";
+import { winning } from "../helpers";
 
 class App extends React.Component {
   state = {
@@ -30,7 +31,7 @@ class App extends React.Component {
   componentDidMount() {
     console.log("level", this.props.level);
     console.log("player_token", this.props.player_token);
-    const whosTurn = this.state.whosTurn;
+    const whosTurn = this.props.whosTurn;
     const level = this.props.level;
     const player_token = this.props.player_token;
     let computer_token = "";
@@ -44,6 +45,11 @@ class App extends React.Component {
       },
       () => {
         console.log("currentstate", this.state);
+        if(this.state.level === 2){
+        this.state.whosTurn ? alert("player goes first") : this.ai_MoveUpdate(this.minimax(this.state.board, this.state.computer_token, this.state.computer_token))
+        }else {
+          this.state.whosTurn ? alert("player goes first") : this.checkForAIWinningMove(this.state.board, this.state)
+        }
       }
     );
   }
@@ -479,6 +485,72 @@ class App extends React.Component {
   boardPopulation = state => {
     console.log("im in boardPopulation", state.board);
     return state.board.filter(c => c === "").length;
+  };
+  //------------------------------MINIMAX------------------------
+  minimax = (newBoard, contestant) => {
+    //available spots
+    const availSpots = emptyIndexies(newBoard);
+
+    // checks for the terminal states such as win, lose, and tie and returning a value accordingly
+    if (winning(newBoard, this.state.player_token)) {
+      return { score: -10 };
+    } else if (winning(newBoard, this.state.computer_token)) {
+      return { score: 10 };
+    } else if (availSpots.length === 0) {
+      return { score: 0 };
+    }
+
+    // an array to collect all the objects
+    let moves = [];
+
+    // loop through available spots
+    for (let i = 0; i < availSpots.length; i++) {
+      //create an object for each and store the index of that spot that was stored as a number in the object's index key
+      let move = {};
+      move.index = newBoard[availSpots[i]];
+
+      // set the empty spot to the current player
+      newBoard[availSpots[i]] = contestant;
+
+      //if collect the score resulted from calling minimax on the opponent of the current player
+      if (contestant === this.state.computer_token) {
+        let result = this.minimax(newBoard, this.state.player_token);
+        move.score = result.score;
+      } else {
+        let result = this.minimax(newBoard, this.state.computer_token);
+        move.score = result.score;
+      }
+
+      //reset the spot to empty
+      newBoard[availSpots[i]] = move.index;
+
+      // push the object to the array
+      moves.push(move);
+    }
+
+    // if it is the computer's turn loop over the moves and choose the move with the highest score
+    let bestMove;
+    if (contestant === this.state.computer_token) {
+      let bestScore = -10000;
+      for (let i = 0; i < moves.length; i++) {
+        if (moves[i].score > bestScore) {
+          bestScore = moves[i].score;
+          bestMove = i;
+        }
+      }
+    } else {
+      // else loop over the moves and choose the move with the lowest score
+      let bestScore = 10000;
+      for (let i = 0; i < moves.length; i++) {
+        if (moves[i].score < bestScore) {
+          bestScore = moves[i].score;
+          bestMove = i;
+        }
+      }
+    }
+
+    // return the chosen move (object) from the array to the higher depth
+    return moves[bestMove];
   };
 
   render() {
