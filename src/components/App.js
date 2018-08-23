@@ -45,17 +45,13 @@ class App extends React.Component {
       },
       () => {
         console.log("currentstate", this.state);
+        console.log("level", this.state.level);
         if (this.state.level === 2) {
           if (this.state.whosTurn === true) {
             console.log("player goes first");
-          } else {
-            //call minimax for computer move because we are in level two
-            const perfectMove = this.minimax(
-              numerizeBoard(this.state.board),
-              this.state.computer_token
-            );
-            const perfectMoveIndex = perfectMove.index;
-            this.ai_MoveUpdate(perfectMoveIndex, this.state.computer_token);
+          } else if (this.state.whosTurn === false) {
+            const numerizedBoard = numerizeBoard(this.state.board);
+            this.aiMove(numerizedBoard, this.state.computer_token);
           }
         } else {
           if (this.state.whosTurn === true) {
@@ -66,6 +62,11 @@ class App extends React.Component {
         }
       }
     );
+  }
+  async aiMove(board, token) {
+    console.log("im in async aiMove");
+    let perfectMove = await this.minimax(board, token);
+    this.ai_MoveUpdate(perfectMove.index, token);
   }
   setSquareState = (string, int) => {
     let board = [...this.state.board];
@@ -84,71 +85,56 @@ class App extends React.Component {
     );
   };
   playAgain = () => {
+    const compGo = {
+      board: ["", "", "", "", "", "", "", "", ""],
+      gameOver: false,
+      square0: false,
+      square1: false,
+      square2: false,
+      square3: false,
+      square4: false,
+      square5: false,
+      square6: false,
+      square7: false,
+      square8: false,
+      winner: "",
+      whosTurn: false
+    };
+    const playerGo = {
+      board: ["", "", "", "", "", "", "", "", ""],
+      gameOver: false,
+      square0: false,
+      square1: false,
+      square2: false,
+      square3: false,
+      square4: false,
+      square5: false,
+      square6: false,
+      square7: false,
+      square8: false,
+      winner: "",
+      whosTurn: true
+    };
+    //need much more logic here to account for level one or two cases
     if (this.state.winner === "computer") {
-      this.setState({
-        board: ["", "", "", "", "", "", "", "", ""],
-        gameOver: false,
-        square0: false,
-        square1: false,
-        square2: false,
-        square3: false,
-        square4: false,
-        square5: false,
-        square6: false,
-        square7: false,
-        square8: false,
-        winner: ""
-      });
+      console.log("winnercomputer", this.state.winner);
+      this.state.computer_token === "X"
+        ? (this.setState(compGo),
+          this.minimax(
+            numerizeBoard(this.state.board),
+            this.state.computer_token
+          ))
+        : this.setState(playerGo);
     } else if (this.state.winner === "player") {
-      const whosTurn = !this.state.whosTurn;
-      this.setState({
-        board: ["", "", "", "", "", "", "", "", ""],
-        gameOver: false,
-        square0: false,
-        square1: false,
-        square2: false,
-        square3: false,
-        square4: false,
-        square5: false,
-        square6: false,
-        square7: false,
-        square8: false,
-        winner: "",
-        whosTurn
-      });
-    } else if(this.state.winner === "") {
-      if (this.state.player_token === "X") {
-        this.setState({
-          board: ["", "", "", "", "", "", "", "", ""],
-          gameOver: false,
-          square0: false,
-          square1: false,
-          square2: false,
-          square3: false,
-          square4: false,
-          square5: false,
-          square6: false,
-          square7: false,
-          square8: false,
-          whosTurn: true,
-          winner: ""
-        });
-      } else {
-        this.setState({
-          board: ["", "", "", "", "", "", "", "", ""],
-          gameOver: false,
-          square0: false,
-          square1: false,
-          square2: false,
-          square3: false,
-          square4: false,
-          square5: false,
-          square6: false,
-          square7: false,
-          square8: false,
-          whosTurn: false
-        });
-      }
+      console.log("winnerplayer", this.state.winner);
+      this.state.player_token === "X"
+        ? this.setState(playerGo)
+        : this.setState(compGo);
+    } else {
+      console.log("winnerNO", this.state.winner);
+      this.state.player_token === "X"
+        ? this.setState(playerGo)
+        : this.setState(compGo);
     }
   };
 
@@ -176,6 +162,7 @@ class App extends React.Component {
     this.props.history.push(`/`);
   };
   checkForAIWinningMove = (arr, state) => {
+    console.log("checkForAIWinningMove");
     const array = [
       [arr[0], arr[1], arr[2]],
       [arr[3], arr[4], arr[5]],
