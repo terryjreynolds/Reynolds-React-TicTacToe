@@ -118,12 +118,43 @@ class App extends React.Component {
     //need much more logic here to account for level one or two cases
     if (this.state.winner === "computer") {
       console.log("winnercomputer", this.state.winner);
-      this.state.computer_token === "X"
-        ? (this.setState(compGo),
-          this.minimax(
+      if (this.state.computer_token === "X") {
+        this.setState(compGo, () => {
+          this.aiMove(
             numerizeBoard(this.state.board),
             this.state.computer_token
-          ))
+          );
+        });
+      } else {
+        this.setState(playerGo);
+      }
+    } else if (this.state.winner === "player") {
+      if (this.state.player_token === "X") {
+        this.setState(playerGo);
+      } else {
+        this.setState(compGo, () => {
+          this.aiMove(
+            numerizeBoard(this.state.board),
+            this.state.computer_token
+          );
+        });
+      }
+    } else {
+      if (this.state.player_token === "X") {
+        this.setState(playerGo);
+      } else {
+        this.setState(compGo, () => {
+          this.aiMove(
+            numerizeBoard(this.state.board),
+            this.state.computer_token
+          );
+        });
+      }
+    }
+
+    /*  this.state.computer_token === "X"
+        ? (this.setState(compGo),
+          )
         : this.setState(playerGo);
     } else if (this.state.winner === "player") {
       console.log("winnerplayer", this.state.winner);
@@ -135,7 +166,7 @@ class App extends React.Component {
       this.state.player_token === "X"
         ? this.setState(playerGo)
         : this.setState(compGo);
-    }
+    } */
   };
 
   reset = () => {
@@ -333,6 +364,7 @@ class App extends React.Component {
     board.splice(int, 1, token);
     console.log("newArray", board);
     let whosTurn = !this.state.whosTurn;
+
     this.setState(
       {
         board,

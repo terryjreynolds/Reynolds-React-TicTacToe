@@ -54,7 +54,6 @@ class GameBoard extends React.Component {
         square7: false,
         square8: false
       });
-      //probably need render props func. here to use the new state
     }
 
     //construct an object to pass to setState
@@ -71,10 +70,12 @@ class GameBoard extends React.Component {
   };
 
   render() {
+    var colorWhite = color: white
     return (
       <div className="board-wrapper">
         <div className="game-board">
           <button
+          style={this.props.board[0] === "" && color= 'white'}
             disabled={
               this.props.board[0] !== "" || this.props.gameOver === true
                 ? true
@@ -83,7 +84,7 @@ class GameBoard extends React.Component {
             className={this.state.square0 ? "square0-lit" : "square0"}
             onClick={() => this.handleClick(0)}
           >
-            {this.props.board[0]}
+            {this.props.board[0] === "" ? "h" : this.props.board[0]}
           </button>
           <button
             disabled={
