@@ -6,6 +6,18 @@ body {
 * {
   box-sizing: border-box;
 }
+/* ---------------variables--------------------- */
+
+:root {
+  --w-width: 100%;
+  --h-height: 100%;
+  --f-font-size: 1.8em;
+  --fw-font-weight: bold;
+  --bg-background: #dddddd;
+  --bdr-border: dashed 2px blue;
+  --out-outline-offset: -8px;
+  --o-outline: 2px dotted whitesmoke;
+}
 button:disabled {
   color: black;
 }
@@ -18,7 +30,7 @@ button:disabled {
   text-align: center;
   grid-row-start: 1;
   grid-row-end: 2;
-  font-size: 10vh;
+  font-size: 10vmax;
   font-family: "Noto Sans", sans-serif;
   color: rgb(97, 218, 251);
 }
@@ -27,7 +39,7 @@ button:disabled {
   grid-row-end: 3;
   padding: 2vh;
   text-align: center;
-  font-size: 5vh;
+  font-size: 4vmax;
   font-family: "Noto Sans", sans-serif;
 }
 .sm-button {
@@ -60,7 +72,7 @@ button:disabled {
 .app-game-title {
   grid-row-start: 1;
   grid-row-end: 2;
-  font-size: 8vh;
+  font-size: 8vmax;
   font-family: "Noto Sans", sans-serif;
   color: rgb(97, 218, 251);
 }
@@ -92,6 +104,7 @@ button:disabled {
   cursor: pointer;
   margin-left: 0.8vh;
   border: solid 0.2vh rgb(97, 218, 251);
+  background: #dddddd;
 }
 .playAgain-button {
   width: 8em;
@@ -99,175 +112,224 @@ button:disabled {
   font-family: "Noto Sans", sans-serif;
   cursor: pointer;
   border: solid 0.2vh rgb(97, 218, 251);
-}
-.board-wrapper {
-  display: flex;
-  flex-direction: row;
-  justify-self: center;
-  width: 40vh;
-  height: 40vh;
+  background: #dddddd;
 }
 .game-board {
   grid-row-start: 4;
   grid-row-end: 5;
   display: grid;
-  grid-gap: 1px;
-  grid-template-rows: minmax(200px, 1fr), minmax(200px, 1fr), minmax(200px, 1fr);
-  grid-template-columns: minmax(200px, 1fr), minmax(200px, 1fr),
-    minmax(200px, 1fr);
-  min-width: 100%;
-  min-height: 100%;
+  width: 50vh;
+  height: 50vh;
+  justify-self: center;
+  grid-template-rows: 1fr, 1fr, 1fr;
+  grid-template-columns: 1fr, 1fr, 1fr;
 }
-.square0 {
-  grid-area: 1/1 / span 1 / span 1;
-  text-align: center;
 
-  font-size: 1em;
+.square0 {
+  text-align: center;
+  width: var(--w-width);
+  height: var(--h-height);
   border-color: rgb(97, 218, 251);
+  font-size: var(--f-font-size);
+  font-weight: var(--fw-font-weight);
+  background: var(--bg-background);
   font-family: "Noto Sans", sans-serif;
 }
 .square0-lit {
   grid-area: 1/1 / span 1 / span 1;
-  text-align: center;
 
-  font-size: 1em;
-  border-color: rgb(97, 218, 251);
+  text-align: center;
+  width: var(--w-width);
+  height: var(--h-height);
+  font-size: var(--f-font-size);
+  font-weight: var(--fw-font-weight);
+
   font-family: "Noto Sans", sans-serif;
   background-color: rgb(97, 218, 251);
+  outline: var(--o-outline);
+  outline-offset: var(--out-outline-offset);
 }
 .square1 {
   grid-area: 1/2 / span 1 / span 1;
   text-align: center;
-
-  font-size: 1em;
+  width: var(--w-width);
+  height: var(--h-height);
+  font-size: var(--f-font-size);
+  font-weight: var(--fw-font-weight);
   border-color: rgb(97, 218, 251);
+  background: var(--bg-background);
   font-family: "Noto Sans", sans-serif;
 }
 .square1-lit {
   grid-area: 1/2 / span 1 / span 1;
   text-align: center;
-
-  font-size: 1em;
-  border-color: rgb(97, 218, 251);
+  width: var(--w-width);
+  height: var(--h-height);
+  font-size: var(--f-font-size);
+  font-weight: var(--fw-font-weight);
+  outline: var(--o-outline);
+  outline-offset: var(--out-outline-offset);
   font-family: "Noto Sans", sans-serif;
   background-color: rgb(97, 218, 251);
 }
 .square2 {
   grid-area: 1/3 / span 1 / span 1;
   text-align: center;
-
-  font-size: 1em;
+  width: var(--w-width);
+  height: var(--h-height);
+  font-size: var(--f-font-size);
+  font-weight: var(--fw-font-weight);
   border-color: rgb(97, 218, 251);
+  background: var(--bg-background);
   font-family: "Noto Sans", sans-serif;
 }
 .square2-lit {
   grid-area: 1/3 / span 1 / span 1;
   text-align: center;
-
-  font-size: 1em;
-  border-color: rgb(97, 218, 251);
+  width: var(--w-width);
+  height: var(--h-height);
+  font-size: var(--f-font-size);
+  font-weight: var(--fw-font-weight);
+  outline: var(--o-outline);
+  outline-offset: var(--out-outline-offset);
   font-family: "Noto Sans", sans-serif;
   background-color: rgb(97, 218, 251);
 }
 .square3 {
   grid-area: 2/1 / span 1 / span 1;
   text-align: center;
-
-  font-size: 1em;
+  width: var(--w-width);
+  height: var(--h-height);
+  font-size: var(--f-font-size);
+  font-weight: var(--fw-font-weight);
   border-color: rgb(97, 218, 251);
+  background: var(--bg-background);
   font-family: "Noto Sans", sans-serif;
 }
 .square3-lit {
   grid-area: 2/1 / span 1 / span 1;
   text-align: center;
-
-  font-size: 1em;
-  border-color: rgb(97, 218, 251);
+  width: var(--w-width);
+  height: var(--h-height);
+  font-size: var(--f-font-size);
+  font-weight: var(--fw-font-weight);
+  outline: var(--o-outline);
+  outline-offset: var(--out-outline-offset);
   font-family: "Noto Sans", sans-serif;
   background-color: rgb(97, 218, 251);
 }
 .square4 {
   grid-area: 2/2 / span 1 / span 1;
   text-align: center;
-
-  font-size: 1em;
+  width: var(--w-width);
+  height: var(--h-height);
+  font-size: var(--f-font-size);
+  font-weight: var(--fw-font-weight);
   border-color: rgb(97, 218, 251);
+  background: var(--bg-background);
   font-family: "Noto Sans", sans-serif;
 }
 .square4-lit {
   grid-area: 2/2 / span 1 / span 1;
   text-align: center;
-
-  font-size: 1em;
-  border-color: rgb(97, 218, 251);
+  width: var(--w-width);
+  height: var(--h-height);
+  font-size: var(--f-font-size);
+  font-weight: var(--fw-font-weight);
+  outline: var(--o-outline);
+  outline-offset: var(--out-outline-offset);
   font-family: "Noto Sans", sans-serif;
   background-color: rgb(97, 218, 251);
 }
 .square5 {
   grid-area: 2/3 / span 1 / span 1;
   text-align: center;
-
-  font-size: 1em;
+  width: var(--w-width);
+  height: var(--h-height);
+  font-size: var(--f-font-size);
+  font-weight: var(--fw-font-weight);
   border-color: rgb(97, 218, 251);
+  background: var(--bg-background);
   font-family: "Noto Sans", sans-serif;
 }
 .square5-lit {
   grid-area: 2/3 / span 1 / span 1;
   text-align: center;
-
-  font-size: 1em;
-  border-color: rgb(97, 218, 251);
+  width: var(--w-width);
+  height: var(--h-height);
+  font-size: var(--f-font-size);
+  font-weight: var(--fw-font-weight);
+  outline: var(--o-outline);
+  outline-offset: var(--out-outline-offset);
   font-family: "Noto Sans", sans-serif;
   background-color: rgb(97, 218, 251);
 }
 .square6 {
   grid-area: 3/1 / span 1 / span 1;
   text-align: center;
-
-  font-size: 1em;
+  width: var(--w-width);
+  height: var(--h-height);
+  font-size: var(--f-font-size);
+  font-weight: var(--fw-font-weight);
   border-color: rgb(97, 218, 251);
+  background: var(--bg-background);
   font-family: "Noto Sans", sans-serif;
 }
 .square6-lit {
   grid-area: 3/1 / span 1 / span 1;
   text-align: center;
-
-  font-size: 1em;
-  border-color: rgb(97, 218, 251);
+  width: var(--w-width);
+  height: var(--h-height);
+  font-size: var(--f-font-size);
+  font-weight: var(--fw-font-weight);
+  outline: var(--o-outline);
+  outline-offset: var(--out-outline-offset);
   font-family: "Noto Sans", sans-serif;
   background-color: rgb(97, 218, 251);
 }
 .square7 {
   grid-area: 3/2 / span 1 / span 1;
   text-align: center;
-
-  font-size: 1em;
+  width: var(--w-width);
+  height: var(--h-height);
+  font-size: var(--f-font-size);
+  font-weight: var(--fw-font-weight);
   border-color: rgb(97, 218, 251);
+  background: var(--bg-background);
   font-family: "Noto Sans", sans-serif;
 }
 .square7-lit {
   grid-area: 3/2 / span 1 / span 1;
   text-align: center;
-
-  font-size: 1em;
-  border-color: rgb(97, 218, 251);
+  width: var(--w-width);
+  height: var(--h-height);
+  font-size: var(--f-font-size);
+  font-weight: var(--fw-font-weight);
+  outline: var(--o-outline);
+  outline-offset: var(--out-outline-offset);
   font-family: "Noto Sans", sans-serif;
   background-color: rgb(97, 218, 251);
 }
 .square8 {
   grid-area: 3/3 / span 1 / span 1;
   text-align: center;
-
-  font-size: 1em;
+  width: var(--w-width);
+  height: var(--h-height);
+  font-size: var(--f-font-size);
+  font-weight: var(--fw-font-weight);
   border-color: rgb(97, 218, 251);
+  background: var(--bg-background);
   font-family: "Noto Sans", sans-serif;
 }
 .square8-lit {
   grid-area: 3/3 / span 1 / span 1;
   text-align: center;
-
-  font-size: 1em;
-  border-color: rgb(97, 218, 251);
+  width: var(--w-width);
+  height: var(--h-height);
+  font-size: var(--f-font-size);
+  font-weight: var(--fw-font-weight);
+  outline: var(--o-outline);
+  outline-offset: var(--out-outline-offset);
   font-family: "Noto Sans", sans-serif;
   background-color: rgb(97, 218, 251);
 }

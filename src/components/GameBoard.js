@@ -13,6 +13,16 @@ class GameBoard extends React.Component {
     square7: false,
     square8: false
   };
+
+  textlessButton = {
+    color: "#dddddd",
+    fontSize: "1.8em",
+    fontWeight: "bold"
+  };
+  textedButton = {
+    color: "black"
+  };
+
   componentWillReceiveProps(nextProps) {
     console.log("nextProps", nextProps);
     //destructure nextProps
@@ -70,111 +80,135 @@ class GameBoard extends React.Component {
   };
 
   render() {
-    var colorWhite = color: white
     return (
-      <div className="board-wrapper">
-        <div className="game-board">
-          <button
-          style={this.props.board[0] === "" && color= 'white'}
-            disabled={
-              this.props.board[0] !== "" || this.props.gameOver === true
-                ? true
-                : false
-            }
-            className={this.state.square0 ? "square0-lit" : "square0"}
-            onClick={() => this.handleClick(0)}
-          >
-            {this.props.board[0] === "" ? "h" : this.props.board[0]}
-          </button>
-          <button
-            disabled={
-              this.props.board[1] !== "" || this.props.gameOver === true
-                ? true
-                : false
-            }
-            className={this.state.square1 ? "square1-lit" : "square1"}
-            onClick={() => this.handleClick(1)}
-          >
-            {this.props.board[1]}
-          </button>
-          <button
-            disabled={
-              this.props.board[2] !== "" || this.props.gameOver === true
-                ? true
-                : false
-            }
-            className={this.state.square2 ? "square2-lit" : "square2"}
-            onClick={() => this.handleClick(2)}
-          >
-            {this.props.board[2]}
-          </button>
-          <button
-            disabled={
-              this.props.board[3] !== "" || this.props.gameOver === true
-                ? true
-                : false
-            }
-            className={this.state.square3 ? "square3-lit" : "square3"}
-            onClick={() => this.handleClick(3)}
-          >
-            {this.props.board[3]}
-          </button>
-          <button
-            disabled={
-              this.props.board[4] !== "" || this.props.gameOver === true
-                ? true
-                : false
-            }
-            className={this.state.square4 ? "square4-lit" : "square4"}
-            onClick={() => this.handleClick(4)}
-          >
-            {this.props.board[4]}
-          </button>
-          <button
-            disabled={
-              this.props.board[5] !== "" || this.props.gameOver === true
-                ? true
-                : false
-            }
-            className={this.state.square5 ? "square5-lit" : "square5"}
-            onClick={() => this.handleClick(5)}
-          >
-            {this.props.board[5]}
-          </button>
-          <button
-            disabled={
-              this.props.board[6] !== "" || this.props.gameOver === true
-                ? true
-                : false
-            }
-            className={this.state.square6 ? "square6-lit" : "square6"}
-            onClick={() => this.handleClick(6)}
-          >
-            {this.props.board[6]}
-          </button>
-          <button
-            disabled={
-              this.props.board[7] !== "" || this.props.gameOver === true
-                ? true
-                : false
-            }
-            className={this.state.square7 ? "square7-lit" : "square7"}
-            onClick={() => this.handleClick(7)}
-          >
-            {this.props.board[7]}
-          </button>
-          <button
-            disabled={
-              this.props.board[8] !== "" || this.props.gameOver === true
-                ? true
-                : false
-            }
-            className={this.state.square8 ? "square8-lit" : "square8"}
-            onClick={() => this.handleClick(8)}
-          >
-            {this.props.board[8]}
-          </button>
-        </div>
+      <div className="game-board">
+        <button
+          style={
+            this.props.board[0] === "" ? this.textlessButton : this.textedButton
+          }
+          disabled={
+            this.props.board[0] !== "" || this.props.gameOver === true
+              ? true
+              : false
+          }
+          className={this.state.square0 ? "square0-lit" : "square0"}
+          onClick={() => this.handleClick(0)}
+        >
+          {this.props.board[0] === "" ? "H" : this.props.board[0]}
+        </button>
+
+        <button
+          style={
+            this.props.board[1] === "" ? this.textlessButton : this.textedButton
+          }
+          disabled={
+            this.props.board[1] !== "" || this.props.gameOver === true
+              ? true
+              : false
+          }
+          className={this.state.square1 ? "square1-lit" : "square1"}
+          onClick={() => this.handleClick(1)}
+        >
+          {this.props.board[1] === "" ? "H" : this.props.board[1]}
+        </button>
+        <button
+          style={
+            this.props.board[2] === "" ? this.textlessButton : this.textedButton
+          }
+          disabled={
+            this.props.board[2] !== "" || this.props.gameOver === true
+              ? true
+              : false
+          }
+          className={this.state.square2 ? "square2-lit" : "square2"}
+          onClick={() => this.handleClick(2)}
+        >
+          {this.props.board[2] === "" ? "H" : this.props.board[2]}
+        </button>
+        <button
+          style={
+            this.props.board[3] === "" ? this.textlessButton : this.textedButton
+          }
+          disabled={
+            this.props.board[3] !== "" || this.props.gameOver === true
+              ? true
+              : false
+          }
+          className={this.state.square3 ? "square3-lit" : "square3"}
+          onClick={() => this.handleClick(3)}
+        >
+          {this.props.board[3] === "" ? "H" : this.props.board[3]}
+        </button>
+        <button
+          style={
+            this.props.board[4] === "" ? this.textlessButton : this.textedButton
+          }
+          disabled={
+            this.props.board[4] !== "" || this.props.gameOver === true
+              ? true
+              : false
+          }
+          className={this.state.square4 ? "square4-lit" : "square4"}
+          onClick={() => this.handleClick(4)}
+        >
+          {this.props.board[4] === "" ? "H" : this.props.board[4]}
+        </button>
+        <button
+          style={
+            this.props.board[5] === "" ? this.textlessButton : this.textedButton
+          }
+          disabled={
+            this.props.board[5] !== "" || this.props.gameOver === true
+              ? true
+              : false
+          }
+          className={this.state.square5 ? "square5-lit" : "square5"}
+          onClick={() => this.handleClick(5)}
+        >
+          {this.props.board[5] === "" ? "H" : this.props.board[5]}
+        </button>
+        <button
+          style={
+            this.props.board[6] === "" ? this.textlessButton : this.textedButton
+          }
+          disabled={
+            this.props.board[6] !== "" || this.props.gameOver === true
+              ? true
+              : false
+          }
+          className={this.state.square6 ? "square6-lit" : "square6"}
+          onClick={() => this.handleClick(6)}
+        >
+          {this.props.board[6] === "" ? "H" : this.props.board[6]}
+        </button>
+        <button
+          style={
+            this.props.board[7] === "" ? this.textlessButton : this.textedButton
+          }
+          disabled={
+            this.props.board[7] !== "" || this.props.gameOver === true
+              ? true
+              : false
+          }
+          className={this.state.square7 ? "square7-lit" : "square7"}
+          onClick={() => this.handleClick(7)}
+        >
+          {this.props.board[7] === "" ? "H" : this.props.board[7]}
+        </button>
+        <button
+          style={
+            this.props.board[8] === "" ? this.textlessButton : this.textedButton
+          }
+          disabled={
+            this.props.board[8] !== "" || this.props.gameOver === true
+              ? true
+              : false
+          }
+          className={this.state.square8 ? "square8-lit" : "square8"}
+          onClick={() => this.handleClick(8)}
+        >
+          {this.props.board[8] === "" ? "H" : this.props.board[8]}
+        </button>
       </div>
     );
   }

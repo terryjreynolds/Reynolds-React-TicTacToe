@@ -16,7 +16,7 @@ class LevelSelector extends React.Component {
           <button className="sm-button" onClick={this.handleClickOne}>
             1
           </button>
-          <span>or </span>
+          <span> or </span>
           <button className="sm-button" onClick={this.handleClickTwo}>
             2
           </button>

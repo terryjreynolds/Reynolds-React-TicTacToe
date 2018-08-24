@@ -20,7 +20,7 @@ class TokenSelector extends React.Component {
           <button className="sm-button" onClick={this.handleClickX}>
             X
           </button>
-          <span>or </span>
+          <span> or </span>
           <button className="sm-button" onClick={this.handleClickO}>
             O
           </button>
