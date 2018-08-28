@@ -17,7 +17,7 @@ class PlayButtons extends React.Component {
           Play Again
         </button>
         <button className="reset-button" onClick={this.handleClickReset}>
-          Reset Game
+          Reset
         </button>
       </div>
     );

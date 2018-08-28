@@ -9,12 +9,10 @@ body {
 /* ---------------variables--------------------- */
 
 :root {
-  --w-width: 100%;
-  --h-height: 100%;
-  --f-font-size: 1.8em;
+  --g-grid-gap: none;
+  --f-font-size: 6vmin;
   --fw-font-weight: bold;
   --bg-background: #dddddd;
-  --bdr-border: dashed 2px blue;
   --out-outline-offset: -8px;
   --o-outline: 2px dotted whitesmoke;
 }
@@ -22,21 +20,15 @@ button:disabled {
   color: black;
 }
 .selector {
-  display: grid;
-  grid-template-rows: repeat(3, 1fr);
   margin-top: 25vh;
 }
 .game-title {
   text-align: center;
-  grid-row-start: 1;
-  grid-row-end: 2;
   font-size: 10vmax;
   font-family: "Noto Sans", sans-serif;
   color: rgb(97, 218, 251);
 }
 .selector-buttons {
-  grid-row-start: 2;
-  grid-row-end: 3;
   padding: 2vh;
   text-align: center;
   font-size: 4vmax;
@@ -65,22 +57,16 @@ button:disabled {
   border: 0.1vh solid whitesmoke;
 }
 .app {
-  display: grid;
-  grid-template-rows: auto, auto, auto, auto, auto;
   margin-top: 10vh;
 }
 .app-game-title {
-  grid-row-start: 1;
-  grid-row-end: 2;
-  font-size: 8vmax;
+  font-size: 10vmin;
   font-family: "Noto Sans", sans-serif;
   color: rgb(97, 218, 251);
 }
 .scoreboard {
   font-size: 3vh;
   font-family: "Noto Sans", sans-serif;
-  grid-row-start: 2;
-  grid-row-end: 3;
 }
 .player-integer {
   margin: 1vh;
@@ -89,8 +75,6 @@ button:disabled {
   margin: 1vh;
 }
 .playButtons-parent {
-  grid-row-start: 3;
-  grid-row-end: 4;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -115,21 +99,15 @@ button:disabled {
   background: #dddddd;
 }
 .game-board {
-  grid-row-start: 4;
-  grid-row-end: 5;
   display: grid;
-  width: 50vh;
-  height: 50vh;
-  justify-self: center;
-  grid-template-rows: 1fr, 1fr, 1fr;
-  grid-template-columns: 1fr, 1fr, 1fr;
+  grid-template-columns: repeat(3, 20vmin);
+  grid-template-rows: repeat(3, 20vmin);
+  justify-content: center;
 }
-
 .square0 {
-  text-align: center;
-  width: var(--w-width);
-  height: var(--h-height);
-  border-color: rgb(97, 218, 251);
+  grid-area: 1/1 / span 1 / span 1;
+  grid-gap: var(--g-grid-gap);
+  border: solid 0.2vh rgb(97, 218, 251);
   font-size: var(--f-font-size);
   font-weight: var(--fw-font-weight);
   background: var(--bg-background);
@@ -137,13 +115,9 @@ button:disabled {
 }
 .square0-lit {
   grid-area: 1/1 / span 1 / span 1;
-
-  text-align: center;
-  width: var(--w-width);
-  height: var(--h-height);
+  grid-gap: var(--g-grid-gap);
   font-size: var(--f-font-size);
   font-weight: var(--fw-font-weight);
-
   font-family: "Noto Sans", sans-serif;
   background-color: rgb(97, 218, 251);
   outline: var(--o-outline);
@@ -151,20 +125,16 @@ button:disabled {
 }
 .square1 {
   grid-area: 1/2 / span 1 / span 1;
-  text-align: center;
-  width: var(--w-width);
-  height: var(--h-height);
+  grid-gap: var(--g-grid-gap);
   font-size: var(--f-font-size);
   font-weight: var(--fw-font-weight);
-  border-color: rgb(97, 218, 251);
+  border: solid 0.2vh rgb(97, 218, 251);
   background: var(--bg-background);
   font-family: "Noto Sans", sans-serif;
 }
 .square1-lit {
   grid-area: 1/2 / span 1 / span 1;
-  text-align: center;
-  width: var(--w-width);
-  height: var(--h-height);
+  grid-gap: var(--g-grid-gap);
   font-size: var(--f-font-size);
   font-weight: var(--fw-font-weight);
   outline: var(--o-outline);
@@ -174,20 +144,16 @@ button:disabled {
 }
 .square2 {
   grid-area: 1/3 / span 1 / span 1;
-  text-align: center;
-  width: var(--w-width);
-  height: var(--h-height);
+  grid-gap: var(--g-grid-gap);
   font-size: var(--f-font-size);
   font-weight: var(--fw-font-weight);
-  border-color: rgb(97, 218, 251);
+  border: solid 0.2vh rgb(97, 218, 251);
   background: var(--bg-background);
   font-family: "Noto Sans", sans-serif;
 }
 .square2-lit {
   grid-area: 1/3 / span 1 / span 1;
-  text-align: center;
-  width: var(--w-width);
-  height: var(--h-height);
+  grid-gap: var(--g-grid-gap);
   font-size: var(--f-font-size);
   font-weight: var(--fw-font-weight);
   outline: var(--o-outline);
@@ -197,20 +163,16 @@ button:disabled {
 }
 .square3 {
   grid-area: 2/1 / span 1 / span 1;
-  text-align: center;
-  width: var(--w-width);
-  height: var(--h-height);
+  grid-gap: var(--g-grid-gap);
   font-size: var(--f-font-size);
   font-weight: var(--fw-font-weight);
-  border-color: rgb(97, 218, 251);
+  border: solid 0.2vh rgb(97, 218, 251);
   background: var(--bg-background);
   font-family: "Noto Sans", sans-serif;
 }
 .square3-lit {
   grid-area: 2/1 / span 1 / span 1;
-  text-align: center;
-  width: var(--w-width);
-  height: var(--h-height);
+  grid-gap: var(--g-grid-gap);
   font-size: var(--f-font-size);
   font-weight: var(--fw-font-weight);
   outline: var(--o-outline);
@@ -220,20 +182,16 @@ button:disabled {
 }
 .square4 {
   grid-area: 2/2 / span 1 / span 1;
-  text-align: center;
-  width: var(--w-width);
-  height: var(--h-height);
+  grid-gap: var(--g-grid-gap);
   font-size: var(--f-font-size);
   font-weight: var(--fw-font-weight);
-  border-color: rgb(97, 218, 251);
+  border: solid 0.2vh rgb(97, 218, 251);
   background: var(--bg-background);
   font-family: "Noto Sans", sans-serif;
 }
 .square4-lit {
   grid-area: 2/2 / span 1 / span 1;
-  text-align: center;
-  width: var(--w-width);
-  height: var(--h-height);
+  grid-gap: var(--g-grid-gap);
   font-size: var(--f-font-size);
   font-weight: var(--fw-font-weight);
   outline: var(--o-outline);
@@ -243,20 +201,16 @@ button:disabled {
 }
 .square5 {
   grid-area: 2/3 / span 1 / span 1;
-  text-align: center;
-  width: var(--w-width);
-  height: var(--h-height);
+  grid-gap: var(--g-grid-gap);
   font-size: var(--f-font-size);
   font-weight: var(--fw-font-weight);
-  border-color: rgb(97, 218, 251);
+  border: solid 0.2vh rgb(97, 218, 251);
   background: var(--bg-background);
   font-family: "Noto Sans", sans-serif;
 }
 .square5-lit {
   grid-area: 2/3 / span 1 / span 1;
-  text-align: center;
-  width: var(--w-width);
-  height: var(--h-height);
+  grid-gap: var(--g-grid-gap);
   font-size: var(--f-font-size);
   font-weight: var(--fw-font-weight);
   outline: var(--o-outline);
@@ -266,20 +220,16 @@ button:disabled {
 }
 .square6 {
   grid-area: 3/1 / span 1 / span 1;
-  text-align: center;
-  width: var(--w-width);
-  height: var(--h-height);
+  grid-gap: var(--g-grid-gap);
   font-size: var(--f-font-size);
   font-weight: var(--fw-font-weight);
-  border-color: rgb(97, 218, 251);
+  border: solid 0.2vh rgb(97, 218, 251);
   background: var(--bg-background);
   font-family: "Noto Sans", sans-serif;
 }
 .square6-lit {
   grid-area: 3/1 / span 1 / span 1;
-  text-align: center;
-  width: var(--w-width);
-  height: var(--h-height);
+  grid-gap: var(--g-grid-gap);
   font-size: var(--f-font-size);
   font-weight: var(--fw-font-weight);
   outline: var(--o-outline);
@@ -289,20 +239,16 @@ button:disabled {
 }
 .square7 {
   grid-area: 3/2 / span 1 / span 1;
-  text-align: center;
-  width: var(--w-width);
-  height: var(--h-height);
+  grid-gap: var(--g-grid-gap);
   font-size: var(--f-font-size);
   font-weight: var(--fw-font-weight);
-  border-color: rgb(97, 218, 251);
+  border: solid 0.2vh rgb(97, 218, 251);
   background: var(--bg-background);
   font-family: "Noto Sans", sans-serif;
 }
 .square7-lit {
   grid-area: 3/2 / span 1 / span 1;
-  text-align: center;
-  width: var(--w-width);
-  height: var(--h-height);
+  grid-gap: var(--g-grid-gap);
   font-size: var(--f-font-size);
   font-weight: var(--fw-font-weight);
   outline: var(--o-outline);
@@ -312,20 +258,16 @@ button:disabled {
 }
 .square8 {
   grid-area: 3/3 / span 1 / span 1;
-  text-align: center;
-  width: var(--w-width);
-  height: var(--h-height);
+  grid-gap: var(--g-grid-gap);
   font-size: var(--f-font-size);
   font-weight: var(--fw-font-weight);
-  border-color: rgb(97, 218, 251);
+  border: solid 0.2vh rgb(97, 218, 251);
   background: var(--bg-background);
   font-family: "Noto Sans", sans-serif;
 }
 .square8-lit {
   grid-area: 3/3 / span 1 / span 1;
-  text-align: center;
-  width: var(--w-width);
-  height: var(--h-height);
+  grid-gap: var(--g-grid-gap);
   font-size: var(--f-font-size);
   font-weight: var(--fw-font-weight);
   outline: var(--o-outline);
@@ -335,8 +277,6 @@ button:disabled {
 }
 
 .footer {
-  grid-row-start: 5;
-  grid-row-end: 6;
   margin-top: 2vh;
   font-size: 0.8vw;
   font-family: "Noto Sans", sans-serif;

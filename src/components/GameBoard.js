@@ -111,6 +111,7 @@ class GameBoard extends React.Component {
         >
           {this.props.board[1] === "" ? "H" : this.props.board[1]}
         </button>
+
         <button
           style={
             this.props.board[2] === "" ? this.textlessButton : this.textedButton
@@ -125,6 +126,7 @@ class GameBoard extends React.Component {
         >
           {this.props.board[2] === "" ? "H" : this.props.board[2]}
         </button>
+
         <button
           style={
             this.props.board[3] === "" ? this.textlessButton : this.textedButton
@@ -139,6 +141,7 @@ class GameBoard extends React.Component {
         >
           {this.props.board[3] === "" ? "H" : this.props.board[3]}
         </button>
+
         <button
           style={
             this.props.board[4] === "" ? this.textlessButton : this.textedButton
@@ -153,6 +156,7 @@ class GameBoard extends React.Component {
         >
           {this.props.board[4] === "" ? "H" : this.props.board[4]}
         </button>
+
         <button
           style={
             this.props.board[5] === "" ? this.textlessButton : this.textedButton
@@ -167,6 +171,7 @@ class GameBoard extends React.Component {
         >
           {this.props.board[5] === "" ? "H" : this.props.board[5]}
         </button>
+
         <button
           style={
             this.props.board[6] === "" ? this.textlessButton : this.textedButton
@@ -181,6 +186,7 @@ class GameBoard extends React.Component {
         >
           {this.props.board[6] === "" ? "H" : this.props.board[6]}
         </button>
+
         <button
           style={
             this.props.board[7] === "" ? this.textlessButton : this.textedButton
@@ -195,6 +201,7 @@ class GameBoard extends React.Component {
         >
           {this.props.board[7] === "" ? "H" : this.props.board[7]}
         </button>
+
         <button
           style={
             this.props.board[8] === "" ? this.textlessButton : this.textedButton
