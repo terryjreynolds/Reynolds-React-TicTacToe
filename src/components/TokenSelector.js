@@ -17,11 +17,11 @@ class TokenSelector extends React.Component {
         <header className="game-title">Tic Tac Toe</header>
         <div className="selector-buttons">
           <span>Choose </span>
-          <button className="sm-button" onClick={this.handleClickX}>
+          <button className="smbutton" onClick={this.handleClickX}>
             X
           </button>
           <span> or </span>
-          <button className="sm-button" onClick={this.handleClickO}>
+          <button className="smbutton" onClick={this.handleClickO}>
             O
           </button>
           ?

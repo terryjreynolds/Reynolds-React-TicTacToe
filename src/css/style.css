@@ -34,7 +34,24 @@ button:disabled {
   font-size: 4vmax;
   font-family: "Noto Sans", sans-serif;
 }
-.sm-button {
+.slideOut {
+  padding: 2vh;
+  text-align: center;
+  font-size: 4vmax;
+  font-family: "Noto Sans", sans-serif;
+  animation: slide 0.5s;
+}
+@keyframes slide {
+  0% {
+    transform: translate(0px);
+  }
+
+  100% {
+    transform: translate(-1000px);
+  }
+}
+
+.smbutton {
   margin: 0.5vh;
   font-size: 100%;
   text-align: center;
