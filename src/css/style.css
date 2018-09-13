@@ -59,7 +59,7 @@ button:disabled {
   background: black;
   opacity: 1;
 }
-.sm-button:hover {
+.smbutton:hover {
   opacity: 0.5;
   cursor: pointer;
 }

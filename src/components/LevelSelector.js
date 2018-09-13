@@ -4,6 +4,7 @@ class LevelSelector extends React.Component {
   state = {
     smbutton: true
   };
+
   handleClickOne = () => {
     this.setState({
       smbutton: false
@@ -13,10 +14,17 @@ class LevelSelector extends React.Component {
       tar.push(`/tokenselector1/`);
     }
 
-    setTimeout(changeClass, 400, target);
+    setTimeout(changeClass, 300, target);
   };
   handleClickTwo = () => {
-    this.props.history.push(`/tokenselector2/`);
+    this.setState({
+      smbutton: false
+    });
+    const target = this.props.history;
+    function changeClass(tar) {
+      tar.push(`/tokenselector2/`);
+    }
+    setTimeout(changeClass, 300, target);
   };
 
   render() {
