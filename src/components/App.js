@@ -360,9 +360,14 @@ class App extends React.Component {
     console.log("im in ai_MoveUpdate");
     let board = [...this.state.board];
     console.log("newArray", board);
+    function updating(board, int) {
+      console.log("updating");
+      board.splice(int, 1, token);
+    }
+    setTimeout(function() {
+      updating(board, int);
+    }, 500);
 
-    board.splice(int, 1, token);
-    console.log("newArray", board);
     let whosTurn = !this.state.whosTurn;
 
     this.setState(
