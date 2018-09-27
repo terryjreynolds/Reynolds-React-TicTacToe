@@ -91,6 +91,9 @@ button:disabled {
 .computer-integer {
   margin: 1vh;
 }
+.draw-integer {
+  margin: 1vh;
+}
 .playButtons-parent {
   display: flex;
   justify-content: center;

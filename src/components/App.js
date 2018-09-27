@@ -15,6 +15,7 @@ class App extends React.Component {
     whosTurn: true,
     player_score: 0,
     computer_score: 0,
+    draw_score: 0,
     gameOver: false,
     square0: false,
     square1: false,
@@ -356,18 +357,33 @@ class App extends React.Component {
     let ai_token = this.state.computer_token;
     this.ai_MoveUpdate(num, ai_token);
   };
+  //to delay AI moves as to appear more human, I had to store the result of splicing function
+  //in a promise variable. Once the promise variable was fulfilled, then the doTheUpdate function
+  //could run on a setTimeout of 800
   ai_MoveUpdate = (int, token) => {
     console.log("im in ai_MoveUpdate");
     let board = [...this.state.board];
     console.log("newArray", board);
-    function updating(board, int) {
-      console.log("updating");
-      board.splice(int, 1, token);
-    }
-    setTimeout(function() {
-      updating(board, int);
-    }, 500);
+    splicingBoard(board, int, token, this.doTheUpdate);
 
+    async function splicingBoard(board, int, token, tool) {
+      console.log("splicingBoard");
+      let promise = await splicing(board, int, token);
+      console.log("promise", promise);
+      setTimeout(tool, 400, promise);
+
+      function splicing(board, int, token) {
+        console.log("im in splicing");
+        let newBoard = board;
+        newBoard.splice(int, 1, token);
+        console.log("newBoard", newBoard);
+        return newBoard;
+      }
+    }
+  };
+
+  doTheUpdate = board => {
+    console.log("im in doTheUpdate");
     let whosTurn = !this.state.whosTurn;
 
     this.setState(
@@ -414,25 +430,13 @@ class App extends React.Component {
     console.log("im in checkForDraw");
     //check for draw after checking for win
     if (arr.every(c => c !== "")) {
-      //logic needed here
       console.log("its a draw");
-      /*  const whosTurn = !this.state.whosTurn;
-      setTimeout(() => {
-        this.setState({
-          board: ["", "", "", "", "", "", "", "", ""],
-          gameOver: false,
-          whosTurn,
-          square0: false,
-          square1: false,
-          square2: false,
-          square3: false,
-          square4: false,
-          square5: false,
-          square6: false,
-          square7: false,
-          square8: false
-        });
-      }, 2000); */
+      this.setState(prevState => {
+        return {
+          draw_score: prevState.draw_score + 1,
+          gameOver: true
+        };
+      });
       console.log("drawturn", state.whosTurn);
     } else {
       const turn = state.whosTurn;
@@ -643,6 +647,7 @@ class App extends React.Component {
         <Scoreboard
           player_score={this.state.player_score}
           computer_score={this.state.computer_score}
+          draw_score={this.state.draw_score}
         />
         <PlayButtons
           initialState={this.initialState}
