@@ -63,6 +63,12 @@ button:disabled {
   opacity: 0.5;
   cursor: pointer;
 }
+@media (hover: none), (hover: on-demand) {
+  .smbutton:hover {
+    /* suppress hover effect on devices that don't support hover fully*/
+    opacity: 1;
+  }
+}
 .reset-button:hover {
   cursor: pointer;
   background: rgb(217, 83, 79);
@@ -81,18 +87,80 @@ button:disabled {
   font-family: "Noto Sans", sans-serif;
   color: rgb(97, 218, 251);
 }
+
 .scoreboard {
   font-size: 3vh;
   font-family: "Noto Sans", sans-serif;
 }
+@keyframes rotation {
+  0% {
+    transform: rotateY(0deg);
+  }
+
+  100% {
+    transform: rotateY(360deg);
+  }
+}
+.scoreWordTransition {
+  display: inline-block;
+  transition: color 2s ease;
+  color: rgb(97, 218, 251);
+  animation: rotation 1s;
+}
+
+.scoreTransition {
+  display: inline-block;
+  margin-left: 1vh;
+  margin-right: 1vh;
+  transition: color 2s ease;
+  color: rgb(97, 218, 251);
+  animation: rotation 1s;
+}
+.playerWordTransition {
+  display: inline-block;
+  transition: color 2s ease;
+  color: rgb(97, 218, 251);
+  animation: rotation 1s;
+}
+
+.playerTransition {
+  display: inline-block;
+  margin-left: 1vh;
+  margin-right: 1vh;
+  transition: color 2s ease;
+  color: rgb(97, 218, 251);
+  animation: rotation 1s;
+}
+.drawWordTransition {
+  display: inline-block;
+  transition: color 2s ease;
+  color: rgb(244, 217, 9);
+  animation: rotation 1s;
+}
+
+.drawTransition {
+  display: inline-block;
+  transition: color 2s ease;
+  color: rgb(244, 217, 9);
+  animation: rotation 1s;
+}
+.drawTransition {
+  transition: color 2s ease;
+  color: rgb(244, 217, 9);
+}
+.player {
+}
 .player-integer {
-  margin: 1vh;
+  margin-right: 1vh;
+}
+.computer {
 }
 .computer-integer {
-  margin: 1vh;
+  margin-right: 1vh;
+}
+.draw {
 }
 .draw-integer {
-  margin: 1vh;
 }
 .playButtons-parent {
   display: flex;
@@ -143,6 +211,17 @@ button:disabled {
   outline: var(--o-outline);
   outline-offset: var(--out-outline-offset);
 }
+.square0-drawLit {
+  grid-area: 1/1 / span 1 / span 1;
+  grid-gap: var(--g-grid-gap);
+  font-size: var(--f-font-size);
+  font-weight: var(--fw-font-weight);
+  font-family: "Noto Sans", sans-serif;
+  transition: background-color 2s ease;
+  background-color: rgb(244, 217, 9);
+  outline: var(--o-outline);
+  outline-offset: var(--out-outline-offset);
+}
 .square1 {
   grid-area: 1/2 / span 1 / span 1;
   grid-gap: var(--g-grid-gap);
@@ -161,6 +240,17 @@ button:disabled {
   outline-offset: var(--out-outline-offset);
   font-family: "Noto Sans", sans-serif;
   background-color: rgb(97, 218, 251);
+}
+.square1-drawLit {
+  grid-area: 1/2 / span 1 / span 1;
+  grid-gap: var(--g-grid-gap);
+  font-size: var(--f-font-size);
+  font-weight: var(--fw-font-weight);
+  outline: var(--o-outline);
+  outline-offset: var(--out-outline-offset);
+  font-family: "Noto Sans", sans-serif;
+  transition: background-color 2s ease;
+  background-color: rgb(244, 217, 9);
 }
 .square2 {
   grid-area: 1/3 / span 1 / span 1;
@@ -181,6 +271,17 @@ button:disabled {
   font-family: "Noto Sans", sans-serif;
   background-color: rgb(97, 218, 251);
 }
+.square2-drawLit {
+  grid-area: 1/3 / span 1 / span 1;
+  grid-gap: var(--g-grid-gap);
+  font-size: var(--f-font-size);
+  font-weight: var(--fw-font-weight);
+  outline: var(--o-outline);
+  outline-offset: var(--out-outline-offset);
+  font-family: "Noto Sans", sans-serif;
+  transition: background-color 2s ease;
+  background-color: rgb(244, 217, 9);
+}
 .square3 {
   grid-area: 2/1 / span 1 / span 1;
   grid-gap: var(--g-grid-gap);
@@ -199,6 +300,17 @@ button:disabled {
   outline-offset: var(--out-outline-offset);
   font-family: "Noto Sans", sans-serif;
   background-color: rgb(97, 218, 251);
+}
+.square3-drawLit {
+  grid-area: 2/1 / span 1 / span 1;
+  grid-gap: var(--g-grid-gap);
+  font-size: var(--f-font-size);
+  font-weight: var(--fw-font-weight);
+  outline: var(--o-outline);
+  outline-offset: var(--out-outline-offset);
+  font-family: "Noto Sans", sans-serif;
+  transition: background-color 2s ease;
+  background-color: rgb(244, 217, 9);
 }
 .square4 {
   grid-area: 2/2 / span 1 / span 1;
@@ -219,6 +331,17 @@ button:disabled {
   font-family: "Noto Sans", sans-serif;
   background-color: rgb(97, 218, 251);
 }
+.square4-drawLit {
+  grid-area: 2/2 / span 1 / span 1;
+  grid-gap: var(--g-grid-gap);
+  font-size: var(--f-font-size);
+  font-weight: var(--fw-font-weight);
+  outline: var(--o-outline);
+  outline-offset: var(--out-outline-offset);
+  font-family: "Noto Sans", sans-serif;
+  transition: background-color 2s ease;
+  background-color: rgb(244, 217, 9);
+}
 .square5 {
   grid-area: 2/3 / span 1 / span 1;
   grid-gap: var(--g-grid-gap);
@@ -237,6 +360,17 @@ button:disabled {
   outline-offset: var(--out-outline-offset);
   font-family: "Noto Sans", sans-serif;
   background-color: rgb(97, 218, 251);
+}
+.square5-drawLit {
+  grid-area: 2/3 / span 1 / span 1;
+  grid-gap: var(--g-grid-gap);
+  font-size: var(--f-font-size);
+  font-weight: var(--fw-font-weight);
+  outline: var(--o-outline);
+  outline-offset: var(--out-outline-offset);
+  font-family: "Noto Sans", sans-serif;
+  transition: background-color 2s ease;
+  background-color: rgb(244, 217, 9);
 }
 .square6 {
   grid-area: 3/1 / span 1 / span 1;
@@ -257,6 +391,17 @@ button:disabled {
   font-family: "Noto Sans", sans-serif;
   background-color: rgb(97, 218, 251);
 }
+.square6-drawLit {
+  grid-area: 3/1 / span 1 / span 1;
+  grid-gap: var(--g-grid-gap);
+  font-size: var(--f-font-size);
+  font-weight: var(--fw-font-weight);
+  outline: var(--o-outline);
+  outline-offset: var(--out-outline-offset);
+  font-family: "Noto Sans", sans-serif;
+  transition: background-color 2s ease;
+  background-color: rgb(244, 217, 9);
+}
 .square7 {
   grid-area: 3/2 / span 1 / span 1;
   grid-gap: var(--g-grid-gap);
@@ -276,6 +421,17 @@ button:disabled {
   font-family: "Noto Sans", sans-serif;
   background-color: rgb(97, 218, 251);
 }
+.square7-drawLit {
+  grid-area: 3/2 / span 1 / span 1;
+  grid-gap: var(--g-grid-gap);
+  font-size: var(--f-font-size);
+  font-weight: var(--fw-font-weight);
+  outline: var(--o-outline);
+  outline-offset: var(--out-outline-offset);
+  font-family: "Noto Sans", sans-serif;
+  transition: background-color 2s ease;
+  background-color: rgb(244, 217, 9);
+}
 .square8 {
   grid-area: 3/3 / span 1 / span 1;
   grid-gap: var(--g-grid-gap);
@@ -294,6 +450,17 @@ button:disabled {
   outline-offset: var(--out-outline-offset);
   font-family: "Noto Sans", sans-serif;
   background-color: rgb(97, 218, 251);
+}
+.square8-drawLit {
+  grid-area: 3/3 / span 1 / span 1;
+  grid-gap: var(--g-grid-gap);
+  font-size: var(--f-font-size);
+  font-weight: var(--fw-font-weight);
+  outline: var(--o-outline);
+  outline-offset: var(--out-outline-offset);
+  font-family: "Noto Sans", sans-serif;
+  transition: background-color 2s ease;
+  background-color: rgb(244, 217, 9);
 }
 
 .footer {

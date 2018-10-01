@@ -353,7 +353,9 @@ class App extends React.Component {
     let remainingCells = [];
     arr.map((c, i) => (c === "" ? remainingCells.push(i) : false));
     console.log(remainingCells);
-    let num = Math.floor(Math.random() * remainingCells.length + 0);
+    //choose a random cell from the array of remaining cells
+    let num = remainingCells[Math.floor(Math.random() * remainingCells.length)];
+    console.log("num", num);
     let ai_token = this.state.computer_token;
     this.ai_MoveUpdate(num, ai_token);
   };
@@ -434,7 +436,8 @@ class App extends React.Component {
       this.setState(prevState => {
         return {
           draw_score: prevState.draw_score + 1,
-          gameOver: true
+          gameOver: true,
+          winner: "draw"
         };
       });
       console.log("drawturn", state.whosTurn);
@@ -484,6 +487,7 @@ class App extends React.Component {
     //light up the winning squares
     this.lightUpSquares(rowIndex);
   };
+
   lightUpSquares = rowIndex => {
     console.log("im in lightUpSquares");
     console.log("rowIndex", rowIndex);
@@ -648,6 +652,7 @@ class App extends React.Component {
           player_score={this.state.player_score}
           computer_score={this.state.computer_score}
           draw_score={this.state.draw_score}
+          winner={this.state.winner}
         />
         <PlayButtons
           initialState={this.initialState}
@@ -658,6 +663,7 @@ class App extends React.Component {
           board={this.state.board}
           player_token={this.state.player_token}
           setSquareState={this.setSquareState}
+          winner={this.state.winner}
           whosTurn={this.state.whosTurn}
           gameOver={this.state.gameOver}
           square0={this.state.square0}

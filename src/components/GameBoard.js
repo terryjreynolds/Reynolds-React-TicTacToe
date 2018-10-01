@@ -91,7 +91,13 @@ class GameBoard extends React.Component {
               ? true
               : false
           }
-          className={this.state.square0 ? "square0-lit" : "square0"}
+          className={
+            this.state.square0
+              ? "square0-lit"
+              : this.props.winner === "draw"
+                ? "square0-drawLit"
+                : "square0"
+          }
           onClick={() => this.handleClick(0)}
         >
           {this.props.board[0] === "" ? "H" : this.props.board[0]}
@@ -106,7 +112,13 @@ class GameBoard extends React.Component {
               ? true
               : false
           }
-          className={this.state.square1 ? "square1-lit" : "square1"}
+          className={
+            this.state.square1
+              ? "square1-lit"
+              : this.props.winner === "draw"
+                ? "square1-drawLit"
+                : "square1"
+          }
           onClick={() => this.handleClick(1)}
         >
           {this.props.board[1] === "" ? "H" : this.props.board[1]}
@@ -121,7 +133,13 @@ class GameBoard extends React.Component {
               ? true
               : false
           }
-          className={this.state.square2 ? "square2-lit" : "square2"}
+          className={
+            this.state.square2
+              ? "square2-lit"
+              : this.props.winner === "draw"
+                ? "square2-drawLit"
+                : "square2"
+          }
           onClick={() => this.handleClick(2)}
         >
           {this.props.board[2] === "" ? "H" : this.props.board[2]}
@@ -136,7 +154,13 @@ class GameBoard extends React.Component {
               ? true
               : false
           }
-          className={this.state.square3 ? "square3-lit" : "square3"}
+          className={
+            this.state.square3
+              ? "square3-lit"
+              : this.props.winner === "draw"
+                ? "square3-drawLit"
+                : "square3"
+          }
           onClick={() => this.handleClick(3)}
         >
           {this.props.board[3] === "" ? "H" : this.props.board[3]}
@@ -151,7 +175,13 @@ class GameBoard extends React.Component {
               ? true
               : false
           }
-          className={this.state.square4 ? "square4-lit" : "square4"}
+          className={
+            this.state.square4
+              ? "square4-lit"
+              : this.props.winner === "draw"
+                ? "square4-drawLit"
+                : "square4"
+          }
           onClick={() => this.handleClick(4)}
         >
           {this.props.board[4] === "" ? "H" : this.props.board[4]}
@@ -166,7 +196,13 @@ class GameBoard extends React.Component {
               ? true
               : false
           }
-          className={this.state.square5 ? "square5-lit" : "square5"}
+          className={
+            this.state.square5
+              ? "square5-lit"
+              : this.props.winner === "draw"
+                ? "square5-drawLit"
+                : "square5"
+          }
           onClick={() => this.handleClick(5)}
         >
           {this.props.board[5] === "" ? "H" : this.props.board[5]}
@@ -181,7 +217,13 @@ class GameBoard extends React.Component {
               ? true
               : false
           }
-          className={this.state.square6 ? "square6-lit" : "square6"}
+          className={
+            this.state.square6
+              ? "square6-lit"
+              : this.props.winner === "draw"
+                ? "square6-drawLit"
+                : "square6"
+          }
           onClick={() => this.handleClick(6)}
         >
           {this.props.board[6] === "" ? "H" : this.props.board[6]}
@@ -196,7 +238,13 @@ class GameBoard extends React.Component {
               ? true
               : false
           }
-          className={this.state.square7 ? "square7-lit" : "square7"}
+          className={
+            this.state.square7
+              ? "square7-lit"
+              : this.props.winner === "draw"
+                ? "square7-drawLit"
+                : "square7"
+          }
           onClick={() => this.handleClick(7)}
         >
           {this.props.board[7] === "" ? "H" : this.props.board[7]}
@@ -211,7 +259,13 @@ class GameBoard extends React.Component {
               ? true
               : false
           }
-          className={this.state.square8 ? "square8-lit" : "square8"}
+          className={
+            this.state.square8
+              ? "square8-lit"
+              : this.props.winner === "draw"
+                ? "square8-drawLit"
+                : "square8"
+          }
           onClick={() => this.handleClick(8)}
         >
           {this.props.board[8] === "" ? "H" : this.props.board[8]}
