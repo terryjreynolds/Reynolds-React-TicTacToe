@@ -30,8 +30,6 @@ class App extends React.Component {
   };
 
   componentDidMount() {
-    console.log("level", this.props.level);
-    console.log("player_token", this.props.player_token);
     const whosTurn = this.props.whosTurn;
     const level = this.props.level;
     const player_token = this.props.player_token;
@@ -45,11 +43,8 @@ class App extends React.Component {
         whosTurn
       },
       () => {
-        console.log("currentstate", this.state);
-        console.log("level", this.state.level);
         if (this.state.level === 2) {
           if (this.state.whosTurn === true) {
-            console.log("player goes first");
           } else if (this.state.whosTurn === false) {
             const numerizedBoard = numerizeBoard(this.state.board);
             this.aiMove(numerizedBoard, this.state.computer_token);
@@ -65,14 +60,12 @@ class App extends React.Component {
     );
   }
   async aiMove(board, token) {
-    console.log("im in async aiMove");
     let perfectMove = await this.minimax(board, token);
     this.ai_MoveUpdate(perfectMove.index, token);
   }
   setSquareState = (string, int) => {
     let board = [...this.state.board];
     board.splice(int, 1, string);
-    console.log("array", board);
     let whosTurn = !this.state.whosTurn;
     this.setState(
       {
@@ -118,7 +111,6 @@ class App extends React.Component {
     };
     //need much more logic here to account for level one or two cases
     if (this.state.winner === "computer") {
-      console.log("winnercomputer", this.state.winner);
       if (this.state.computer_token === "X") {
         this.setState(compGo, () => {
           this.aiMove(
@@ -152,22 +144,6 @@ class App extends React.Component {
         });
       }
     }
-
-    /*  this.state.computer_token === "X"
-        ? (this.setState(compGo),
-          )
-        : this.setState(playerGo);
-    } else if (this.state.winner === "player") {
-      console.log("winnerplayer", this.state.winner);
-      this.state.player_token === "X"
-        ? this.setState(playerGo)
-        : this.setState(compGo);
-    } else {
-      console.log("winnerNO", this.state.winner);
-      this.state.player_token === "X"
-        ? this.setState(playerGo)
-        : this.setState(compGo);
-    } */
   };
 
   reset = () => {
@@ -194,7 +170,6 @@ class App extends React.Component {
     this.props.history.push(`/`);
   };
   checkForAIWinningMove = (arr, state) => {
-    console.log("checkForAIWinningMove");
     const array = [
       [arr[0], arr[1], arr[2]],
       [arr[3], arr[4], arr[5]],
@@ -205,23 +180,17 @@ class App extends React.Component {
       [arr[0], arr[4], arr[8]],
       [arr[2], arr[4], arr[6]]
     ];
-    console.log("array", array);
-    console.log("playertoken", state.player_token);
     //find an array among arrays that has two AI tokens and one empty string
     const filtered = array
       .map((c, i) => c.filter(d => d === state.player_token || d === ""))
       .map(f => f.length === 1 && f.includes(state.player_token) === false)
       .indexOf(true);
-    console.log("filtered", filtered);
 
     //if filtered has an array with two AI tokens and one empty string, find the empty string so
     //AI may make a move in that square for the win
     if (filtered !== -1) {
       const targetIndex = array[filtered].map((c, i) => c === "").indexOf(true);
-      console.log("targetIndex", targetIndex);
-
       const element = this.stateReferenceConverter(filtered, targetIndex);
-      console.log("element", element);
 
       let ai_token = state.computer_token;
 
@@ -231,7 +200,6 @@ class App extends React.Component {
     }
   };
   stateReferenceConverter(a, b) {
-    console.log("inside ref converter", a, b);
     return a === 0 && b === 0
       ? 0
       : a === 0 && b === 1
@@ -283,7 +251,6 @@ class App extends React.Component {
                                                     : "";
   }
   shouldAIBlock = arr => {
-    console.log("im in shouldAIBlock");
     const array = [
       [arr[0], arr[1], arr[2]],
       [arr[3], arr[4], arr[5]],
@@ -299,12 +266,10 @@ class App extends React.Component {
       .map((c, i) => c.filter(d => d === computer_token || d === ""))
       .map(f => f.length === 1 && f.includes(computer_token) === false)
       .indexOf(true);
-    console.log("filtered", filtered);
     if (filtered !== -1) {
       const targetIndex = array[filtered].map((c, i) => c === "").indexOf(true);
 
       const element = this.stateReferenceConverter(filtered, targetIndex);
-      console.log("element", element);
 
       this.ai_MoveUpdate(element, computer_token);
     } else {
@@ -314,14 +279,12 @@ class App extends React.Component {
   };
   heuristicAIMove = arr => {
     //try to take the centre first. If not available, call chooseACorner
-    console.log("im in heuristicAIMove", arr);
     let ai_token = this.state.computer_token;
     arr[4] === ""
       ? this.ai_MoveUpdate(4, ai_token)
       : this.chooseACorner(this.state.board);
   };
   chooseACorner = arr => {
-    console.log("im in chooseACorner");
     let arrayOfCorners = [];
 
     arr.map(
@@ -336,12 +299,10 @@ class App extends React.Component {
                 ? arrayOfCorners.push(i)
                 : ""
     );
-    console.log("arrayOfCorners", arrayOfCorners);
 
     if (arrayOfCorners.length === 0) {
       this.chooseFromRemainingCells(arr);
     } else {
-      console.log("length", arrayOfCorners.length);
       let num = Math.floor(Math.random() * arrayOfCorners.length + 0);
       let choice = arrayOfCorners[num];
       let ai_token = this.state.computer_token;
@@ -349,13 +310,10 @@ class App extends React.Component {
     }
   };
   chooseFromRemainingCells = arr => {
-    console.log("chooseFromRemainingCells");
     let remainingCells = [];
     arr.map((c, i) => (c === "" ? remainingCells.push(i) : false));
-    console.log(remainingCells);
     //choose a random cell from the array of remaining cells
     let num = remainingCells[Math.floor(Math.random() * remainingCells.length)];
-    console.log("num", num);
     let ai_token = this.state.computer_token;
     this.ai_MoveUpdate(num, ai_token);
   };
@@ -363,29 +321,22 @@ class App extends React.Component {
   //in a promise variable. Once the promise variable was fulfilled, then the doTheUpdate function
   //could run on a setTimeout of 800
   ai_MoveUpdate = (int, token) => {
-    console.log("im in ai_MoveUpdate");
     let board = [...this.state.board];
-    console.log("newArray", board);
     splicingBoard(board, int, token, this.doTheUpdate);
 
     async function splicingBoard(board, int, token, tool) {
-      console.log("splicingBoard");
       let promise = await splicing(board, int, token);
-      console.log("promise", promise);
       setTimeout(tool, 400, promise);
 
       function splicing(board, int, token) {
-        console.log("im in splicing");
         let newBoard = board;
         newBoard.splice(int, 1, token);
-        console.log("newBoard", newBoard);
         return newBoard;
       }
     }
   };
 
   doTheUpdate = board => {
-    console.log("im in doTheUpdate");
     let whosTurn = !this.state.whosTurn;
 
     this.setState(
@@ -399,7 +350,6 @@ class App extends React.Component {
     );
   };
   checkForWinOrDraw = (arr, state) => {
-    console.log("im in checkForWinOrDraw");
     //an array of all the possible winning rows
     const array = [
       [arr[0], arr[1], arr[2]],
@@ -418,8 +368,6 @@ class App extends React.Component {
     const trueIndexO = array
       .map((c, i, a) => c.every(d => d === "O"))
       .indexOf(true);
-    console.log("trueIndexX", trueIndexX);
-    console.log("trueIndexO", trueIndexO);
     //this round of code golf just checks to see if any of the arrays within the array are either
     //all Xs or all Os-- if neither, then check for draw before deciding whos turn it is.
     trueIndexX !== -1
@@ -429,10 +377,8 @@ class App extends React.Component {
         : this.checkForDraw(arr, state);
   };
   checkForDraw = (arr, state) => {
-    console.log("im in checkForDraw");
     //check for draw after checking for win
     if (arr.every(c => c !== "")) {
-      console.log("its a draw");
       this.setState(prevState => {
         return {
           draw_score: prevState.draw_score + 1,
@@ -440,11 +386,8 @@ class App extends React.Component {
           winner: "draw"
         };
       });
-      console.log("drawturn", state.whosTurn);
     } else {
       const turn = state.whosTurn;
-      console.log("turn", turn);
-      console.log("level", state.level, "computertoken", state.computer_token);
       if (turn === false) {
         if (state.level === 1) {
           this.checkForClearBoard(arr, state);
@@ -461,12 +404,8 @@ class App extends React.Component {
     }
   };
   declareWinner = (winningRow, rowIndex) => {
-    console.log("im in declare winner");
-    console.log("index", rowIndex);
-    console.log(winningRow);
     //check to see what player matches the letter in the winningRow and call and post to the screen
     if (winningRow[0] === this.state.player_token) {
-      console.log("player wins");
       this.setState(prevState => {
         return {
           player_score: prevState.player_score + 1,
@@ -475,7 +414,6 @@ class App extends React.Component {
         };
       });
     } else {
-      console.log("Computer Wins");
       this.setState(prevState => {
         return {
           computer_score: prevState.computer_score + 1,
@@ -489,8 +427,6 @@ class App extends React.Component {
   };
 
   lightUpSquares = rowIndex => {
-    console.log("im in lightUpSquares");
-    console.log("rowIndex", rowIndex);
     switch (rowIndex) {
       case 0:
         this.setState({
@@ -563,18 +499,14 @@ class App extends React.Component {
     }
   };
   checkForClearBoard = (arr, state) => {
-    console.log("im in checkForClearBoard");
-
     //if the board is clear, call a function to choose a best first move; if not, call
     //checkforaWinningMove
     const boardIsEmpty = this.boardPopulation(state);
-    console.log("boardIsEmpty", boardIsEmpty);
     boardIsEmpty === 9
       ? this.pickAGoodFirstAIMove()
       : this.checkForAIWinningMove(arr, state);
   };
   boardPopulation = state => {
-    console.log("im in boardPopulation", state.board);
     return state.board.filter(c => c === "").length;
   };
   //------------------------------MINIMAX------------------------

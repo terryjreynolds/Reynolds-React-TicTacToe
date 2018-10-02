@@ -4,7 +4,6 @@ export function findSquaresToLight(arr) {
   Object.entries(arr).map(c => c.includes(true) && array.push(c));
   const refined = [];
   array.map(c => refined.push(c[0]));
-  console.log("c0", refined);
   return refined;
 }
 export function objectMaker(el1, el2, el3) {
@@ -57,6 +56,5 @@ export function numerizeBoard(arr) {
   arr.map(
     (c, i) => (c === "" ? numerizedBoard.push(i) : numerizedBoard.push(c))
   );
-  console.log("numerizedBoard", numerizedBoard);
   return numerizedBoard;
 }

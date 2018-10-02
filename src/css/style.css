@@ -148,19 +148,11 @@ button:disabled {
   transition: color 2s ease;
   color: rgb(244, 217, 9);
 }
-.player {
-}
 .player-integer {
   margin-right: 1vh;
 }
-.computer {
-}
 .computer-integer {
   margin-right: 1vh;
-}
-.draw {
-}
-.draw-integer {
 }
 .playButtons-parent {
   display: flex;
@@ -168,7 +160,6 @@ button:disabled {
   align-items: center;
   padding: 1vh;
 }
-
 .reset-button {
   width: 8em;
   font-size: 2vh;

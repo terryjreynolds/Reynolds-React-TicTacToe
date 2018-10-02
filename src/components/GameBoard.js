@@ -24,7 +24,6 @@ class GameBoard extends React.Component {
   };
 
   componentWillReceiveProps(nextProps) {
-    console.log("nextProps", nextProps);
     //destructure nextProps
     const {
       square0,
@@ -51,7 +50,6 @@ class GameBoard extends React.Component {
     };
     //use helper function to isolate 3 winning squares
     const refined = findSquaresToLight(squares);
-    console.log("refined", refined, refined.length);
     if (refined.length === 0) {
       this.setState({
         square0: false,
