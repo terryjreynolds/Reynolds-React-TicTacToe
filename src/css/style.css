@@ -6,6 +6,10 @@ body {
 * {
   box-sizing: border-box;
 }
+#portfolioLink {
+  color: white;
+}
+
 /* ---------------variables--------------------- */
 
 :root {
@@ -459,5 +463,4 @@ button:disabled {
   font-size: 0.8vw;
   font-family: "Noto Sans", sans-serif;
   color: white;
-  cursor: pointer;
 }
